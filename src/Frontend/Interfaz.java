@@ -172,12 +172,13 @@ public class Interfaz extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1028, 694));
-        setMinimumSize(new java.awt.Dimension(1028, 694));
-        setPreferredSize(new java.awt.Dimension(1000, 694));
+        setMinimumSize(new java.awt.Dimension(12, 12));
+        setPreferredSize(new java.awt.Dimension(1007, 710));
+        setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
-        Fondo.setMinimumSize(new java.awt.Dimension(1028, 694));
-        Fondo.setPreferredSize(new java.awt.Dimension(1028, 694));
+        Fondo.setMinimumSize(new java.awt.Dimension(1028, 700));
+        Fondo.setPreferredSize(new java.awt.Dimension(1007, 710));
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
@@ -286,15 +287,17 @@ public class Interfaz extends javax.swing.JFrame {
         PanelSalida.setBackground(new java.awt.Color(255, 255, 255));
         PanelSalida.setColumns(20);
         PanelSalida.setRows(5);
+        PanelSalida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 51), 3));
         jScrollPane1.setViewportView(PanelSalida);
 
-        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1020, 180));
+        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1000, 200));
 
         PanelFuente.setBackground(new java.awt.Color(255, 255, 255));
+        PanelFuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51), 3));
         PanelFuente.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jScrollPanelFuente.setViewportView(PanelFuente);
 
-        Fondo.add(jScrollPanelFuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1020, 410));
+        Fondo.add(jScrollPanelFuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1000, 410));
 
         getContentPane().add(Fondo, java.awt.BorderLayout.CENTER);
 
