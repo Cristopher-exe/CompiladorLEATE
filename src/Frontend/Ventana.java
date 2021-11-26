@@ -29,6 +29,7 @@ public class Ventana extends javax.swing.JDialog {
         initComponents();
         lex = (DefaultTableModel) tblLexemas.getModel();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setModalityType(ModalityType.MODELESS);
     }
 
     

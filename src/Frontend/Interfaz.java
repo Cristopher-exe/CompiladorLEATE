@@ -445,7 +445,7 @@ public class Interfaz extends javax.swing.JFrame {
         PanelSalida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 51), 3));
         jScrollPane1.setViewportView(PanelSalida);
 
-        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1000, 220));
+        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1000, 210));
 
         PanelFuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51), 3));
         PanelFuente.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
@@ -656,6 +656,8 @@ public class Interfaz extends javax.swing.JFrame {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
         v.setVisible(true);
+        VentanaIdentificadores vd = new VentanaIdentificadores();
+        vd.setVisible(true);
         
         
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
