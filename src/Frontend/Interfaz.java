@@ -656,8 +656,6 @@ public class Interfaz extends javax.swing.JFrame {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
         v.setVisible(true);
-        VentanaIdentificadores vd = new VentanaIdentificadores();
-        vd.setVisible(true);
         
         
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
