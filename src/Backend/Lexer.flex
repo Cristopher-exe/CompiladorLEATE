@@ -22,12 +22,10 @@ ESPACIO = [ \t,\r,\n,\f,\r\n]+
 SIMBOLO = [@!$%&?¡]
 ACENTO = [ñÑáéíóúÁÉÍÓÚ]
 COMENTUNILINEA = "#".*
-COMENMULTILINEA = ['!/\*.*?\*/!s']
 %%
 
 {ESPACIO} {/*Ignorar*/}
 {COMENTUNILINEA} {/*Ignorar*/}
-COMENMULTILINEA {/*Ignorar*/}
 
 retnot|for|while|if|delay_ms|start|else|int|long|pulsa|output_N|KP_Z|KP_X|KP_C|
 KP_V|KP_B|KP_N|KP_M|KeyPlayed|Display|Final|event|caso|output_high|output_low|

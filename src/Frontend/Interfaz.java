@@ -12,6 +12,7 @@ import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.Reader;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -24,6 +25,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
+import Backend.*;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Cristopher
@@ -62,6 +67,136 @@ public class Interfaz extends javax.swing.JFrame {
 
     }
     
+     public void tablaLexemas() throws IOException{
+        Object []O = new Object[3];
+        v.lex.setRowCount(0);
+        
+        try {
+            gdar.guardar(PanelFuente.getText());
+            Reader lector = new BufferedReader(new FileReader(gdar.getURL()));
+            lexer lex = new lexer(lector);
+            String result = "";
+            while(true){
+                Tokens tokens = lex.yylex();
+                if(tokens == null){
+                    PanelSalida.setText(result);
+                    return;
+                }
+                switch(tokens){
+                    case ERRORL_001:
+                            result += "*Error Lexico 001. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" Un Identificador no debe comenzar con un digito.\n";
+                            break;
+                    case ERRORL_002:
+                            result += "*Error Lexico 002. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" Un Identificador no puede comenzar con un simbolo especial.\n";
+                            break;
+                    case ERRORL_003:
+                             result += "*Error Lexico 003. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" La estructura del número es incorrecta, no puede haber más de dos puntos en la expresión.\n";
+                            break;
+                    case ERRORL_004:
+                             result += "*Error Lexico 004. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" La estructura del numero es incorrecta.\n";
+                            break;
+                    case ERRORL_005:
+                             result += "*Error Lexico 005. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" La estructura del número es incorrecta, no se puede combinar puntos con letras y números.\n";
+                            break;
+                    case ERRORL_006:
+                             result += "*Error Lexico 006. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" No pueden ir números con letras después del punto.\n";
+                            break;
+                    case ERRORL_007:
+                             result += "*Error Lexico 007. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" No se admiten puntos(.) en el nombre del identificador.\n";
+                            break;
+                    case ERRORL_008:
+                             result += "*Error Lexico 008. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" El numero no puede terminar con un punto\n";
+                            break;
+                    case ERRORL_009:
+                             result += "*Error Lexico 009. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" No se admiten comas(,) en la estructura de los numeros\n";
+                            break;
+                    case ERRORL_010:
+                             result += "*Error Lexico 011. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" No se admiten puntos(.) en el nombre del identificador.\n";
+                            break;
+                    case ERRORL_000:
+                             result += "*Error Lexico no Identificado. "+"Linea "+lex.line+"["+lex.lexeme+"]."+" Revise su codigo.\n";
+                            break;
+                    case Reservada: 
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                   case TK_Sig_Punt:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             v.lex.addRow(O);
+                            break;
+                        case TK_Sig_Agrup:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case TK_Op_Incremento:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case TK_Op_Disminucion:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case TK_Op_Relacional:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case TK_Op_Arit:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                         case TK_Op_Logi:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case TK_Op_Desigual:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case TK_Op_Asig:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case IDENTIFICADOR:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        case Num:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = tokens;
+                             v.lex.addRow(O);
+                            break;
+                        default:
+                            //System.out.print("aqui");
+                            break; 
+            }
+            }//while
+        } catch (Exception e) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE,null,e);
+        }
+    } 
+     
      //METODO PARA ENCONTRAR LAS ULTIMAS CADENAS
     private int findLastNonWordChar(String text, int index) {
         while (--index >= 0) {
@@ -95,7 +230,8 @@ public class Interfaz extends javax.swing.JFrame {
         final AttributeSet attblue = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(0, 147, 255));
         final AttributeSet attblack = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(0, 0, 0));
         final AttributeSet attorange = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(255, 127, 0));
-
+        final AttributeSet attogray = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(150, 152, 154));
+        
         //STYLO 
         DefaultStyledDocument doc = new DefaultStyledDocument() {
             public void insertString(int offset, String str, AttributeSet a) throws BadLocationException {
@@ -158,7 +294,7 @@ public class Interfaz extends javax.swing.JFrame {
         btnAbrir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnGuardarComo = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnAnalisisLexico = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -263,16 +399,21 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jToolBar1.add(btnGuardarComo);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/analisis lexico.png"))); // NOI18N
-        jButton5.setToolTipText("Analisis Lexico");
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/analisis lexico select.png"))); // NOI18N
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton5);
+        btnAnalisisLexico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/analisis lexico.png"))); // NOI18N
+        btnAnalisisLexico.setToolTipText("Analisis Lexico");
+        btnAnalisisLexico.setBorder(null);
+        btnAnalisisLexico.setBorderPainted(false);
+        btnAnalisisLexico.setContentAreaFilled(false);
+        btnAnalisisLexico.setFocusable(false);
+        btnAnalisisLexico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAnalisisLexico.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/analisis lexico select.png"))); // NOI18N
+        btnAnalisisLexico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAnalisisLexico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnalisisLexicoActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btnAnalisisLexico);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Analisis sintactico.png"))); // NOI18N
         jButton6.setToolTipText("Analisis Sintactico");
@@ -509,6 +650,15 @@ public class Interfaz extends javax.swing.JFrame {
         gdar.guardarComo(PanelFuente.getText());
     }//GEN-LAST:event_btnmenuGuardarComoActionPerformed
 
+    private void btnAnalisisLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisLexicoActionPerformed
+        try {
+            tablaLexemas();
+        } catch (IOException ex) {
+            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        v.setVisible(true);
+    }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
+
     public void abrirsintexto(){
         //Metodo si no hay texto en el panel fuente para el boton abrir
            JFileChooser abrir = new JFileChooser();
@@ -606,10 +756,11 @@ public class Interfaz extends javax.swing.JFrame {
     static String URL="";    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Fondo;
-    private javax.swing.JTextPane PanelFuente;
-    private javax.swing.JTextArea PanelSalida;
+    public static javax.swing.JPanel Fondo;
+    public static javax.swing.JTextPane PanelFuente;
+    public static javax.swing.JTextArea PanelSalida;
     private javax.swing.JButton btnAbrir;
+    private javax.swing.JButton btnAnalisisLexico;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardarComo;
     private javax.swing.JMenuItem btnMenuSalir;
@@ -619,7 +770,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnmenuGuardarComo;
     private javax.swing.JMenuItem btnmenuNuevo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -632,8 +782,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPanelFuente;
+    public static javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JScrollPane jScrollPanelFuente;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
