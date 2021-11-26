@@ -10,7 +10,7 @@ import static Backend.Tokens.*;
  * on 25/11/21 03:56 PM from the specification file
  * <tt>D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Lexer.flex</tt>
  */
-class lexer {
+public class lexer {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -444,7 +444,7 @@ class lexer {
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  lexer(java.io.Reader in) {
+  public lexer(java.io.Reader in) {
       yyline = 1;
     this.zzReader = in;
   }
@@ -455,7 +455,7 @@ class lexer {
    *
    * @param   in  the java.io.Inputstream to read input from.
    */
-  lexer(java.io.InputStream in) {
+  public lexer(java.io.InputStream in) {
     this(new java.io.InputStreamReader(in));
   }
 
@@ -476,7 +476,6 @@ class lexer {
     }
     return map;
   }
-
 
   /**
    * Refills the input buffer.
