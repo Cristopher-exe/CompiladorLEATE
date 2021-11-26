@@ -630,7 +630,7 @@ public class Interfaz extends javax.swing.JFrame {
         /*
             Manda a llamar el metodo y la clase para abrir el panel de guardar
         */
-        gdar.guardarComo(PanelFuente.getText());
+        gdar.guardar(PanelFuente.getText());
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarComoActionPerformed
@@ -698,7 +698,7 @@ public class Interfaz extends javax.swing.JFrame {
         /*
             Manda a llamar el metodo y la clase para abrir el panel de guardar
         */
-        gdar.guardarComo(PanelFuente.getText());
+        gdar.guardar(PanelFuente.getText());
     }//GEN-LAST:event_btnmenuGuardarActionPerformed
 
     private void btnmenuGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmenuGuardarComoActionPerformed
