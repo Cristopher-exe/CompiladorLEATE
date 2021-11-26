@@ -27,6 +27,7 @@ public class Ventana extends javax.swing.JDialog {
     public Ventana(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setTitle("Tabla Lexemas");
         lex = (DefaultTableModel) tblLexemas.getModel();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setModalityType(ModalityType.MODELESS);

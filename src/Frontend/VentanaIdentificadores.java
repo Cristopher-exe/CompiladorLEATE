@@ -5,6 +5,7 @@
 package Frontend;
 
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,6 +20,8 @@ public class VentanaIdentificadores extends javax.swing.JFrame {
      */
     public VentanaIdentificadores() {
         initComponents();
+        this.setTitle("Tabla Identificadores");
+        setIconImage(new ImageIcon(getClass().getResource("/Frontend/Imagenes/Logo.png")).getImage());
         int posx = Toolkit.getDefaultToolkit().getScreenSize().width;
         int posy = Toolkit.getDefaultToolkit().getScreenSize().height;
         

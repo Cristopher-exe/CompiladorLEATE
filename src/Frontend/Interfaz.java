@@ -195,6 +195,7 @@ public class Interfaz extends javax.swing.JFrame {
                              if(esNuevo){
                                  I[0] = lex.lexeme;
                                  I[1] = obtenerTipo(lex.line, lex.lexeme);
+                                 I[2] = obtenerValor(lex.line, lex.lexeme);
                                  I[3] = lex.line;
                                  ventanaid.identi.addRow(I);
                              } else {
@@ -233,8 +234,27 @@ public class Interfaz extends javax.swing.JFrame {
          if(!tipo.equals("")){
              tipo.substring(0, tipo.length());
          }
-         return tipo;
+         return tipo;    
+     }
+     
+     public String obtenerValor(int linea, String lexema){
+         String valor = "";
          
+         String[] lineas;
+         lineas = PanelFuente.getText().split("\n");
+         String[] cadenas;
+         cadenas = lineas[linea-1].split(" ");
+         for(int i = 0; i<cadenas.length;i++){
+             if(cadenas[i].equals("=")){
+                 valor = cadenas[i+1];
+             }
+         }
+         
+         if(!valor.equals("")){
+             valor = valor.substring(0,valor.length()-1);
+         }
+         
+         return valor;
      }
      
      //METODO PARA ENCONTRAR LAS ULTIMAS CADENAS
@@ -696,7 +716,7 @@ public class Interfaz extends javax.swing.JFrame {
         }
         v.setVisible(true);
         
-        
+        ventanaid.setVisible(true);
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
 
     public void abrirsintexto(){
