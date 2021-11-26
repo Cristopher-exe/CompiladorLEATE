@@ -439,7 +439,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         Fondo.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 50));
 
-        PanelSalida.setBackground(new java.awt.Color(255, 255, 255));
         PanelSalida.setColumns(20);
         PanelSalida.setRows(5);
         PanelSalida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 51), 3));
@@ -447,7 +446,6 @@ public class Interfaz extends javax.swing.JFrame {
 
         Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1000, 200));
 
-        PanelFuente.setBackground(new java.awt.Color(255, 255, 255));
         PanelFuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51), 3));
         PanelFuente.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jScrollPanelFuente.setViewportView(PanelFuente);
@@ -657,6 +655,8 @@ public class Interfaz extends javax.swing.JFrame {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
         }
         v.setVisible(true);
+        
+        
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
 
     public void abrirsintexto(){
