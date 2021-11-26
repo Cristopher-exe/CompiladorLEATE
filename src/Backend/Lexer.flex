@@ -29,7 +29,7 @@ COMENTUNILINEA = "#".*
 
 retnot|for|while|if|delay_ms|start|else|int|long|pulsa|output_N|KP_Z|KP_X|KP_C|
 KP_V|KP_B|KP_N|KP_M|KeyPlayed|Display|Final|event|caso|output_high|output_low|
-PIN_BO|PIN_B1|PIN_B2|PIN_B3|PIN_B4|PIN_B5|PIN_B6 {lexeme=yytext(); line=yyline; return Reservada;}
+PIN_B0|PIN_B1|PIN_B2|PIN_B3|PIN_B4|PIN_B5|PIN_B6 {lexeme=yytext(); line=yyline; return Reservada;}
 
 ";" {lexeme=yytext(); line=yyline; return TK_Sig_Punt;}
 "." {lexeme=yytext(); line=yyline; return TK_Sig_Punt;}

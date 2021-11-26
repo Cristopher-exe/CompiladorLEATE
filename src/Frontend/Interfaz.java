@@ -84,7 +84,7 @@ public class Interfaz extends javax.swing.JFrame {
                 }
                 switch(tokens){
                     case ERRORL_001:
-                            result += "*Error Lexico 001. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" Un Identificador no debe comenzar con un digito.\n";
+                            result += "*Error Lexico 001. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" Un Identificador no debe comenzar con uno o más digito.\n";
                             break;
                     case ERRORL_002:
                             result += "*Error Lexico 002. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" Un Identificador no puede comenzar con un simbolo especial.\n";
@@ -125,6 +125,7 @@ public class Interfaz extends javax.swing.JFrame {
                    case TK_Sig_Punt:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
+                             O[2] = tokens;
                              v.lex.addRow(O);
                             break;
                         case TK_Sig_Agrup:
@@ -230,7 +231,7 @@ public class Interfaz extends javax.swing.JFrame {
         final AttributeSet attblue = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(0, 147, 255));
         final AttributeSet attblack = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(0, 0, 0));
         final AttributeSet attorange = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(255, 127, 0));
-        final AttributeSet attogray = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(150, 152, 154));
+        final AttributeSet attopurple = cont.addAttribute(cont.getEmptySet(), StyleConstants.Foreground, new Color(163, 73, 164));
         
         //STYLO 
         DefaultStyledDocument doc = new DefaultStyledDocument() {
@@ -250,9 +251,9 @@ public class Interfaz extends javax.swing.JFrame {
                     if (wordR == after || String.valueOf(text.charAt(wordR)).matches("\\W")) {
                         if (text.substring(wordL, wordR).matches("(\\W)*(for|while|if|else|event|KeyPlayed|start)")) { 
                             setCharacterAttributes(wordL, wordR - wordL, attred, false);
-                        } else if (text.substring(wordL, wordR).matches("(\\W)*(int|long|Final|pulsa|caso|KP_Z|KP_X|KP_C|KP_V|KP_B|KP_N|KP_M)")) {
+                        } else if (text.substring(wordL, wordR).matches("(\\W)*(int|long|Final|KP_Z|KP_X|KP_C|KP_V|KP_B|KP_N|KP_M|PIN_B0|PIN_B1|PIN_B2|PIN_B3|PIN_B4|PIN_B5|PIN_B6)")) {
                             setCharacterAttributes(wordL, wordR - wordL, attblue, false);
-                        } else if (text.substring(wordL, wordR).matches("(\\W)*(retnot|delay_ms|output_N|output_high|output_low|Display)")) {
+                        } else if (text.substring(wordL, wordR).matches("(\\W)*(retnot|delay_ms|output_N|output_high|output_low|Display|pulsa|caso)")) {
                             setCharacterAttributes(wordL, wordR - wordL, attorange, false);
                         } else {
                             setCharacterAttributes(wordL, wordR - wordL, attblack, false);
@@ -445,7 +446,7 @@ public class Interfaz extends javax.swing.JFrame {
         PanelSalida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 51), 3));
         jScrollPane1.setViewportView(PanelSalida);
 
-        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1000, 200));
+        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1000, 220));
 
         PanelFuente.setBackground(new java.awt.Color(255, 255, 255));
         PanelFuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51), 3));
