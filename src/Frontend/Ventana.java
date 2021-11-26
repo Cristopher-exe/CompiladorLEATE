@@ -29,6 +29,7 @@ public class Ventana extends javax.swing.JDialog {
         initComponents();
         lex = (DefaultTableModel) tblLexemas.getModel();
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setModalityType(ModalityType.MODELESS);
     }
 
     
@@ -40,8 +41,6 @@ public class Ventana extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLexemas = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -60,21 +59,6 @@ public class Ventana extends javax.swing.JDialog {
         jScrollPane1.setViewportView(tblLexemas);
 
         jTabbedPane1.addTab("Lexemas", jScrollPane1);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        jTabbedPane1.addTab("tab2", jScrollPane2);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 640));
 
@@ -124,10 +108,8 @@ public class Ventana extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JScrollPane jScrollPane2;
-    public static javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    public static javax.swing.JTable tblLexemas;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable tblLexemas;
     // End of variables declaration//GEN-END:variables
 }
