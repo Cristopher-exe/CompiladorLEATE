@@ -4,6 +4,7 @@
  */
 package Frontend;
 import Backend.Guardar;
+import Frontend.Ventana;
 import Frontend.NumeroLinea;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
@@ -30,6 +32,10 @@ public class Interfaz extends javax.swing.JFrame {
 
     NumeroLinea nl;
     Guardar gdar = new Guardar();
+    Ventana v = new Ventana(this, rootPaneCheckingEnabled);
+    
+    //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
+    //String rutaLexer = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Lexer.flex";
     
     public Interfaz() {
         initComponents();
@@ -45,8 +51,17 @@ public class Interfaz extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         colors();
         cerrar();
+        //Crear el LEXER (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
+        //generarLexer(rutaLexer);
+        
     }
+    
+     public static void generarLexer(String ruta){
+       File archivo = new File(ruta);
+       JFlex.Main.generate(archivo);
 
+    }
+    
      //METODO PARA ENCONTRAR LAS ULTIMAS CADENAS
     private int findLastNonWordChar(String text, int index) {
         while (--index >= 0) {
@@ -173,7 +188,6 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1028, 694));
         setMinimumSize(new java.awt.Dimension(12, 12));
-        setPreferredSize(new java.awt.Dimension(1007, 710));
         setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
