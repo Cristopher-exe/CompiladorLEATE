@@ -38,7 +38,8 @@ public class Interfaz extends javax.swing.JFrame {
     NumeroLinea nl;
     Guardar gdar = new Guardar();
     Ventana v = new Ventana(this, rootPaneCheckingEnabled);
-    
+    VentanaIdentificadores ventanaid = new VentanaIdentificadores();
+        
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
     //String rutaLexer = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Lexer.flex";
     
@@ -66,11 +67,13 @@ public class Interfaz extends javax.swing.JFrame {
        JFlex.Main.generate(archivo);
 
     }
-    
+     
      public void tablaLexemas() throws IOException{
         Object []O = new Object[3];
+        Object []I = new Object[4];
         v.lex.setRowCount(0);
-        
+        ventanaid.identi.setRowCount(0);
+         
         try {
             gdar.guardar(PanelFuente.getText());
             Reader lector = new BufferedReader(new FileReader(gdar.getURL()));
@@ -180,6 +183,22 @@ public class Interfaz extends javax.swing.JFrame {
                              O[1] = lex.lexeme;
                              O[2] = tokens;
                              v.lex.addRow(O);
+                             boolean esNuevo = true;
+                             int existeAqui = 0;
+                             for(int i = 0; i<ventanaid.identi.getRowCount();i++){
+                                 if(lex.lexeme.equals((String)ventanaid.identi.getValueAt(i, 0))){
+                                     esNuevo=false;
+                                     existeAqui = i;
+                                 }
+                             }
+                             if(esNuevo){
+                                 I[0] = lex.lexeme;
+                                 I[1] = obtenerTipo(lex.line, lex.lexeme);
+                                 I[3] = lex.line;
+                                 ventanaid.identi.addRow(I);
+                             } else {
+                                 ventanaid.identi.setValueAt(lex.line, existeAqui, 3);
+                             }
                             break;
                         case Num:
                              O[0] = lex.line;
@@ -195,7 +214,27 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (Exception e) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE,null,e);
         }
-    } 
+    }
+     
+     public String obtenerTipo(int linea, String lexema){
+         String tipo = "";
+         String[] lineas;
+         lineas = PanelFuente.getText().split("\n");
+         String[] cadenas;
+         cadenas = lineas[linea-1].split(" ");
+         for(int i = 0; i<cadenas.length;i++){
+             if(cadenas[i].equals(lexema)){
+                     for(int j = 0; j<i;j++){
+                         tipo += cadenas[j]+" ";
+                     }
+             }
+         }
+         if(!tipo.equals("")){
+             tipo.substring(0, tipo.length());
+         }
+         return tipo;
+         
+     }
      
      //METODO PARA ENCONTRAR LAS ULTIMAS CADENAS
     private int findLastNonWordChar(String text, int index) {
