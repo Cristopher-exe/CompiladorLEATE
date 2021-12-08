@@ -382,13 +382,14 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuItem6.setText("jMenuItem6");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(1028, 694));
+        setMaximumSize(new java.awt.Dimension(2000, 2000));
         setMinimumSize(new java.awt.Dimension(12, 12));
+        setPreferredSize(new java.awt.Dimension(1000, 690));
         setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
-        Fondo.setMinimumSize(new java.awt.Dimension(1028, 700));
-        Fondo.setPreferredSize(new java.awt.Dimension(1007, 710));
+        Fondo.setMinimumSize(new java.awt.Dimension(12, 12));
+        Fondo.setPreferredSize(new java.awt.Dimension(1000, 690));
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
@@ -504,13 +505,13 @@ public class Interfaz extends javax.swing.JFrame {
         PanelSalida.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 204, 51), 3));
         jScrollPane1.setViewportView(PanelSalida);
 
-        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 1000, 210));
+        Fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 460, 990, 180));
 
         PanelFuente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 51, 51), 3));
         PanelFuente.setFont(new java.awt.Font("Consolas", 0, 16)); // NOI18N
         jScrollPanelFuente.setViewportView(PanelFuente);
 
-        Fondo.add(jScrollPanelFuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1000, 410));
+        Fondo.add(jScrollPanelFuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 990, 410));
 
         getContentPane().add(Fondo, java.awt.BorderLayout.CENTER);
 
@@ -601,6 +602,7 @@ public class Interfaz extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Guardado con exito");
             }else if(num == 1) {
                 PanelFuente.setText("");
+                PanelSalida.setText("");
                 gdar.setURL("");
             }
         } 
@@ -620,6 +622,7 @@ public class Interfaz extends javax.swing.JFrame {
                 abrirsintexto();
             }else if(num == 1) {
                 PanelFuente.setText("");
+                PanelSalida.setText("");
                 gdar.setURL("");
                 abrirsintexto();   
             }
@@ -709,6 +712,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnmenuGuardarComoActionPerformed
 
     private void btnAnalisisLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisLexicoActionPerformed
+        PanelSalida.setText("");
         try {
             tablaLexemas();
         } catch (IOException ex) {
