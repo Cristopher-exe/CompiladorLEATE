@@ -38,7 +38,7 @@ public class Interfaz extends javax.swing.JFrame {
     NumeroLinea nl;
     Guardar gdar = new Guardar();
     Ventana v = new Ventana(this, rootPaneCheckingEnabled);
-    VentanaIdentificadores ventanaid = new VentanaIdentificadores();
+    V_Identificadores ventanaid = new V_Identificadores(this, rootPaneCheckingEnabled);
         
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
     //String rutaLexer = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Lexer.flex";
@@ -712,6 +712,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnmenuGuardarComoActionPerformed
 
     private void btnAnalisisLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisLexicoActionPerformed
+        
         PanelSalida.setText("");
         try {
             tablaLexemas();

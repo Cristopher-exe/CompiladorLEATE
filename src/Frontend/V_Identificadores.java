@@ -1,34 +1,28 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package Frontend;
 
-import java.awt.Toolkit;
-import javax.swing.ImageIcon;
+import static Frontend.V_Identificadores.identi;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author chico
+ * @author Cristopher
  */
-public class VentanaIdentificadores extends javax.swing.JFrame {
+public class V_Identificadores extends javax.swing.JDialog {
     public static DefaultTableModel identi;
-
     /**
-     * Creates new form VentanaIdentificadores
+     * Creates new form V_Identificadores
      */
-    public VentanaIdentificadores() {
+    public V_Identificadores(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         this.setTitle("Tabla Identificadores");
-        setIconImage(new ImageIcon(getClass().getResource("/Frontend/Imagenes/Logo.png")).getImage());
-        int posx = Toolkit.getDefaultToolkit().getScreenSize().width;
-        int posy = Toolkit.getDefaultToolkit().getScreenSize().height;
-        
-        
-        this.setLocation(posx-500, posy-637);
         identi = (DefaultTableModel)tablaIdentificadores.getModel();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setModalityType(ModalityType.MODELESS);
     }
 
     /**
@@ -40,13 +34,12 @@ public class VentanaIdentificadores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaIdentificadores = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(400, 337));
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tablaIdentificadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -55,24 +48,21 @@ public class VentanaIdentificadores extends javax.swing.JFrame {
             new String [] {
                 "Identificador", "Tipo", "Valor", "Linea"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tablaIdentificadores);
-        if (tablaIdentificadores.getColumnModel().getColumnCount() > 0) {
-            tablaIdentificadores.getColumnModel().getColumn(0).setResizable(false);
-            tablaIdentificadores.getColumnModel().getColumn(1).setResizable(false);
-            tablaIdentificadores.getColumnModel().getColumn(2).setResizable(false);
-            tablaIdentificadores.getColumnModel().getColumn(3).setResizable(false);
-        }
 
-        jLabel1.setText("Tabla Identificadores");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Tabla de Identificadores", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,17 +70,15 @@ public class VentanaIdentificadores extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
 
         pack();
@@ -107,33 +95,41 @@ public class VentanaIdentificadores extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaIdentificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(V_Identificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaIdentificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(V_Identificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaIdentificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(V_Identificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaIdentificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(V_Identificadores.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaIdentificadores().setVisible(true);
+                V_Identificadores dialog = new V_Identificadores(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tablaIdentificadores;
     // End of variables declaration//GEN-END:variables
 }
