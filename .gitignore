@@ -1,4 +1,4 @@
 build/**
 *.class
 nbproject/**
-*.xml
+*.xml 
