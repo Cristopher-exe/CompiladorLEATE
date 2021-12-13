@@ -5,9 +5,9 @@
         <group>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/Interfaz.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Lexer.flex</file>
+            <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/V_Identificadores.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/Ventana.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/lexer.java</file>
-            <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Guardar.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Tokens.java</file>
         </group>
     </open-files>

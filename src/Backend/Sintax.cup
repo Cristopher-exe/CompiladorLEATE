@@ -1,0 +1,28 @@
+
+package Backend;
+import java_cup.runtime.Symbol;
+
+parser code
+{:
+    public Symbol s;
+
+    public void syntax_error(Symbol s){
+        this.s = s;
+    }
+
+    public Symbol getS(){
+        return this.s;
+    }
+
+:};
+
+terminal retnot,for,while,if,delay_ms,start,else,pulsa,output_N,KP_Z,KP_X,KP_C,
+        KP_V,KP_B,KP_N,KP_M,KeyPlayed,Display,Final,event,caso,output_high,output_low,
+        PIN_B0,PIN_B1,PIN_B2,PIN_B3,PIN_B4,PIN_B5,PIN_B6,T_dato,Op_asig,Op_Suma,Op_Resta,
+        Op_Multiplicacion,Op_Division,Op_relacional,Op_incremento,Parentesis_a,Parentesis_c,
+        Llave_a,Llave_c,Corchete_a,Corchete_c,P_coma,dosPuntos,coma,Identificador,Numero,ERROR
+;
+
+non terminal 
+
+;

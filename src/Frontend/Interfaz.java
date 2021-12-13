@@ -43,6 +43,8 @@ public class Interfaz extends javax.swing.JFrame {
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
     //String rutaLexer = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Lexer.flex";
     
+    
+    
     public Interfaz() {
         initComponents();
         this.setTitle("Compilador LEATE");
@@ -59,7 +61,7 @@ public class Interfaz extends javax.swing.JFrame {
         cerrar();
         //Crear el LEXER (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
         //generarLexer(rutaLexer);
-        
+       
     }
     
      public static void generarLexer(String ruta){
@@ -384,7 +386,6 @@ public class Interfaz extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(2000, 2000));
         setMinimumSize(new java.awt.Dimension(12, 12));
-        setPreferredSize(new java.awt.Dimension(1000, 690));
         setResizable(false);
 
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
