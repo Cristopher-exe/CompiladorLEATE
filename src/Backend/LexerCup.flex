@@ -16,19 +16,17 @@ LETRA = [a-zA-Z]
 DIGITO = [0-9]
 SIGNO = ["+","-"]
 ESPACIO = [ \t,\r,\n,\f,\r\n]+
-SIMBOLO = [@!$%&?¡]
-ACENTO = [ñÑáéíóúÁÉÍÓÚ]
 COMENTUNILINEA = "#".*
 
 %{
-    public Symbol symbol(int type, object value){
+    public Symbol symbol(int type, Object value){
         return new Symbol(type, yyline, yycolumn, value);
     }
     public Symbol symbol(int type){
         return new Symbol(type, yyline, yycolumn);
     }
 %}
-%
+%%
 
 {ESPACIO} {/*Ignorar*/}
 {COMENTUNILINEA} {/*Ignorar*/}
@@ -36,35 +34,25 @@ COMENTUNILINEA = "#".*
 /*Palabras Reservadas*/
 (retnot) {return new Symbol(sym.retnot, yychar, yyline, yytext());}
 
-(for) {return new Symbol(sym.for, yychar, yyline, yytext());}
+(For) {return new Symbol(sym.For, yychar, yyline, yytext());}
 
-(while) {return new Symbol(sym.while, yychar, yyline, yytext());}
+(While) {return new Symbol(sym.While, yychar, yyline, yytext());}
 
-(if) {return new Symbol(sym.if, yychar, yyline, yytext());}
+(If) {return new Symbol(sym.If, yychar, yyline, yytext());}
 
 (delay_ms) {return new Symbol(sym.delay_ms, yychar, yyline, yytext());}
 
-(start) {return new Symbol(sym.start, yychar, yyline, yytext());}
+(star) {return new Symbol(sym.star, yychar, yyline, yytext());}
 
-(else) {return new Symbol(sym.else, yychar, yyline, yytext());}
+(Else) {return new Symbol(sym.Else, yychar, yyline, yytext());}
 
 (pulsa) {return new Symbol(sym.pulsa, yychar, yyline, yytext());}
 
 (output_N) {return new Symbol(sym.output_N, yychar, yyline, yytext());}
 
-(KP_Z) {return new Symbol(sym.KP_Z, yychar, yyline, yytext());}
+/* CONSTANTES DE TECLADO*/
 
-(KP_X) {return new Symbol(sym.KP_X, yychar, yyline, yytext());}
-
-(KP_C){return new Symbol(sym.KP_C, yychar, yyline, yytext());}
-
-(KP_V) {return new Symbol(sym.KP_V, yychar, yyline, yytext());}
-
-(KP_B) {return new Symbol(sym.KP_B, yychar, yyline, yytext());}
-
-(KP_N) {return new Symbol(sym.KP_N, yychar, yyline, yytext());}
-
-(KP_M) {return new Symbol(sym.KP_M, yychar, yyline, yytext());}
+(KP_Z,KP_X,KP_C,KP_V,KP_B,KP_N,KP_M) {return new Symbol(sym.Kp_Teclado, yychar, yyline, yytext());}
 
 (KeyPlayed) {return new Symbol(sym.KeyPlayed, yychar, yyline, yytext());}
 
@@ -80,19 +68,9 @@ COMENTUNILINEA = "#".*
 
 (output_low) {return new Symbol(sym.output_low, yychar, yyline, yytext());}
 
-(PIN_B0) {return new Symbol(sym.PIN_B0, yychar, yyline, yytext());}
 
-(PIN_B1) {return new Symbol(sym.PIN_B1, yychar, yyline, yytext());}
-
-(PIN_B2) {return new Symbol(sym.PIN_B2, yychar, yyline, yytext());}
- 
-(PIN_B3) {return new Symbol(sym.PIN_B3, yychar, yyline, yytext());}
-
-(PIN_B4) {return new Symbol(sym.PIN_B4, yychar, yyline, yytext());}
-
-(PIN_B5) {return new Symbol(sym.PIN_B5, yychar, yyline, yytext());}
-
-(PIN_B6) {return new Symbol(sym.PIN_B6, yychar, yyline, yytext());}
+/*--------------------------------------------------PINES-----------------------*/
+(PIN_B0 | PIN_B1 | PIN_B2 | PIN_B3 | PIN_B4 | PIN_B5 | PIN_B6) {return new Symbol(sym.pines_B, yychar, yyline, yytext());}
 
 /* Tipos de datos */
 ( int | long ) {return new Symbol(sym.T_dato, yychar, yyline, yytext());}
@@ -116,13 +94,13 @@ COMENTUNILINEA = "#".*
 ( ">" | "<" | "==" | "!=" | ">=" | "<=") {return new Symbol(sym.Op_relacional, yychar, yyline, yytext());}
 
 /* Operadores Incremento y decremento */
-( "++" | "--" ) {return new Symbol(sym.Op_incremento, yychar, yyline, yytext());}
+( "++" | "--" ) {return new Symbol(sym.Op_in_de_cremento, yychar, yyline, yytext());}
 
 /* Parentesis de apertura */
-( "(" ) {return new Symbol(sym.Parentesis_a, yychar, yyline, yytext());}
+( "(" ) {return new Symbol(sym.parentesis_a, yychar, yyline, yytext());}
 
 /* Parentesis de cierre */
-( ")" ) {return new Symbol(sym.Parentesis_c, yychar, yyline, yytext());}
+( ")" ) {return new Symbol(sym.parentesis_c, yychar, yyline, yytext());}
 
 /* Llave de apertura */
 ( "{" ) {return new Symbol(sym.Llave_a, yychar, yyline, yytext());}
@@ -143,6 +121,11 @@ COMENTUNILINEA = "#".*
 
 (",") {return new Symbol(sym.coma, yychar, yyline, yytext());}
 
+(".") {return new Symbol(sym.TK_punto, yychar, yyline, yytext());}
+
+("?") {return new Symbol(sym.Sig_Agru, yychar, yyline, yytext());}
+
+
 // |-------------------- RECONOCER EXPRESIONES --------------------| //
 //Identificadores
 {LETRA}({LETRA}|{DIGITO}|_)+ {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
@@ -151,7 +134,7 @@ COMENTUNILINEA = "#".*
 {DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {return new Symbol(sym.Numero, yychar, yyline, yytext());}
 
 /* Error de analisis */
- . {return new Symbol(sym.ERROR, yychar, yyline, yytext());}
+ . {return new Symbol(sym.ERRORL_000, yychar, yyline, yytext());}
 
 
 

@@ -19,7 +19,7 @@ LETRA = [a-zA-Z]
 DIGITO = [0-9]
 SIGNO = ["+","-"]
 ESPACIO = [ \t,\r,\n,\f,\r\n]+
-SIMBOLO = [@!$%&?¡]
+SIMBOLO = [@!$%&¡]
 ACENTO = [ñÑáéíóúÁÉÍÓÚ]
 COMENTUNILINEA = "#".*
 %%
@@ -27,54 +27,82 @@ COMENTUNILINEA = "#".*
 {ESPACIO} {/*Ignorar*/}
 {COMENTUNILINEA} {/*Ignorar*/}
 
-retnot|for|while|if|delay_ms|start|else|int|long|pulsa|output_N|KP_Z|KP_X|KP_C|
-KP_V|KP_B|KP_N|KP_M|KeyPlayed|Display|Final|event|caso|output_high|output_low|
-PIN_B0|PIN_B1|PIN_B2|PIN_B3|PIN_B4|PIN_B5|PIN_B6 {lexeme=yytext(); line=yyline; return Reservada;}
+//PALABRAS RESERVADAS
+retnot {lexeme=yytext(); line=yyline; return retnot;}
+For {lexeme=yytext(); line=yyline; return For;}
+While {lexeme=yytext(); line=yyline; return While;}
+If {lexeme=yytext(); line=yyline; return If;}
+delay_ms {lexeme=yytext(); line=yyline; return delay_ms;}
+star {lexeme=yytext(); line=yyline; return star;}
+Else {lexeme=yytext(); line=yyline; return Else;}
+int {lexeme=yytext(); line=yyline; return T_dato;}
+long {lexeme=yytext(); line=yyline; return T_dato;}
+pulsa {lexeme=yytext(); line=yyline; return pulsa;}
+output_N {lexeme=yytext(); line=yyline; return output_N;}
+KP_Z {lexeme=yytext(); line=yyline; return Kp_Teclado;}
+KP_X {lexeme=yytext(); line=yyline; return Kp_Teclado;}
+KP_C {lexeme=yytext(); line=yyline; return Kp_Teclado;}
+KP_V {lexeme=yytext(); line=yyline; return Kp_Teclado;}
+KP_B {lexeme=yytext(); line=yyline; return Kp_Teclado;}
+KP_N {lexeme=yytext(); line=yyline; return Kp_Teclado;}
+KP_M {lexeme=yytext(); line=yyline; return Kp_Teclado;}
+KeyPlayed {lexeme=yytext(); line=yyline; return KeyPlayed;}
+Display {lexeme=yytext(); line=yyline; return Display;}
+Final {lexeme=yytext(); line=yyline; return Final;}
+event {lexeme=yytext(); line=yyline; return event;}
+caso {lexeme=yytext(); line=yyline; return caso;}
+output_high {lexeme=yytext(); line=yyline; return output_high;}
+output_low {lexeme=yytext(); line=yyline; return output_low;}
+PIN_B0 {lexeme=yytext(); line=yyline; return pines_B;}
+PIN_B1 {lexeme=yytext(); line=yyline; return pines_B;}
+PIN_B2 {lexeme=yytext(); line=yyline; return pines_B;}
+PIN_B3 {lexeme=yytext(); line=yyline; return pines_B;}
+PIN_B4 {lexeme=yytext(); line=yyline; return pines_B;}
+PIN_B5 {lexeme=yytext(); line=yyline; return pines_B;}
+PIN_B6 {lexeme=yytext(); line=yyline; return pines_B;}
 
-";" {lexeme=yytext(); line=yyline; return TK_Sig_Punt;}
-"." {lexeme=yytext(); line=yyline; return TK_Sig_Punt;}
-":" {lexeme=yytext(); line=yyline; return TK_Sig_Punt;}
-"'" {lexeme=yytext(); line=yyline; return TK_Sig_Punt;}
-"," {lexeme=yytext(); line=yyline; return TK_Sig_Punt;}
-"{" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-"}" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-"[" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-"]" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-"(" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-")" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-"¿" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-"?" {lexeme=yytext(); line=yyline; return TK_Sig_Agrup;}
-"++" {lexeme=yytext(); line=yyline; return TK_Op_Incremento;}
-"--" {lexeme=yytext(); line=yyline; return TK_Op_Disminucion;}
-">=" {lexeme=yytext(); line=yyline; return TK_Op_Relacional;} 
-">" {lexeme=yytext(); line=yyline; return TK_Op_Relacional;}
-"<=" {lexeme=yytext(); line=yyline; return TK_Op_Relacional;}
-"<" {lexeme=yytext(); line=yyline; return TK_Op_Relacional;}
-"==" {lexeme=yytext(); line=yyline; return TK_Op_Relacional;}
+";" {lexeme=yytext(); line=yyline; return P_coma;}
+"." {lexeme=yytext(); line=yyline; return TK_punto;}
+":" {lexeme=yytext(); line=yyline; return dosPuntos;}
+"," {lexeme=yytext(); line=yyline; return coma;}
+"{" {lexeme=yytext(); line=yyline; return Llave_a;}
+"}" {lexeme=yytext(); line=yyline; return Llave_c;}
+"[" {lexeme=yytext(); line=yyline; return Corchete_a;}
+"]" {lexeme=yytext(); line=yyline; return Corchete_c;}
+"(" {lexeme=yytext(); line=yyline; return parentesis_a;}
+")" {lexeme=yytext(); line=yyline; return parentesis_c;}
+"¿" {lexeme=yytext(); line=yyline; return Sig_Agru;}
+"?" {lexeme=yytext(); line=yyline; return Sig_Agru;}
+"++" {lexeme=yytext(); line=yyline; return Op_incremento;}
+"--" {lexeme=yytext(); line=yyline; return Op_decremento;}
+">=" {lexeme=yytext(); line=yyline; return Op_relacional;} 
+">" {lexeme=yytext(); line=yyline; return Op_relacional;}
+"<=" {lexeme=yytext(); line=yyline; return Op_relacional;}
+"<" {lexeme=yytext(); line=yyline; return Op_relacional;}
+"==" {lexeme=yytext(); line=yyline; return Op_relacional;}
 
-"+" {lexeme=yytext(); line=yyline; return TK_Op_Arit;}
-"-" {lexeme=yytext(); line=yyline; return TK_Op_Arit;}
-"*" {lexeme=yytext(); line=yyline; return TK_Op_Arit;}
-"/" {lexeme=yytext(); line=yyline; return TK_Op_Arit;}
+"+" {lexeme=yytext(); line=yyline; return Op_Suma;}
+"-" {lexeme=yytext(); line=yyline; return Op_Resta;}
+"*" {lexeme=yytext(); line=yyline; return Op_Multiplicacion;}
+"/" {lexeme=yytext(); line=yyline; return Op_Division;}
 
-"!="  {lexeme=yytext(); line=yyline; return TK_Op_Desigual;}
-"=" {lexeme=yytext(); line=yyline; return TK_Op_Asig;}
+"!="  {lexeme=yytext(); line=yyline; return Op_relacional;}
+"=" {lexeme=yytext(); line=yyline; return Op_asig;}
 
 // |-------------------- RECONOCER EXPRESIONES --------------------| //
 //Identificadores
-{LETRA}({LETRA}|{DIGITO}|_)+ {lexeme=yytext(); line=yyline; return IDENTIFICADOR;}
+{LETRA}({LETRA}|{DIGITO}|_)* {lexeme=yytext(); line=yyline; return Identificador;}
 
 //Num
-{DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return Num;}
+{DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return Numero;}
 
 // // |-------------------- RECONOCER ERRORES --------------------| //
 // Identificadores
 //identificador no comienza con digito
-{DIGITO}+({LETRA}|{DIGITO})+ {lexeme=yytext(); line=yyline; return ERRORL_001;}
+{DIGITO}+({LETRA}|{DIGITO}|_)+ {lexeme=yytext(); line=yyline; return ERRORL_001;}
 
-//identificador no lleva simbolos
-({ACENTO}|{SIMBOLO})(({LETRA}|{DIGITO}|{SIMBOLO}|{ACENTO}))+ {lexeme=yytext(); line=yyline; return ERRORL_002;}
-
+//identificador no debe contener simbolos especiales
+({ACENTO}|{SIMBOLO})(({LETRA}|{SIMBOLO}|{ACENTO}))+ {lexeme=yytext(); line=yyline; return ERRORL_002;}
 
 // Flotantes
 // 12.12.12...
@@ -93,7 +121,7 @@ PIN_B0|PIN_B1|PIN_B2|PIN_B3|PIN_B4|PIN_B5|PIN_B6 {lexeme=yytext(); line=yyline; 
 ({LETRA}+"."{DIGITO}+{LETRA}+) | ({LETRA}+"."{LETRA}+{DIGITO}+) {lexeme=yytext(); line=yyline; return ERRORL_007;}
 
 // 12. | 12e.
-({DIGITO}+{LETRA}*".")|({DIGITO}+{LETRA}*"."{LETRA}+) {lexeme=yytext(); line=yyline; return ERRORL_008;}
+({DIGITO}+{LETRA}*"."{LETRA}+)|({DIGITO}+{LETRA}*".") {lexeme=yytext(); line=yyline; return ERRORL_008;}
 
 // 3,14
 ({DIGITO}+","{DIGITO}+) {lexeme=yytext(); line=yyline; return ERRORL_009;}
@@ -101,5 +129,23 @@ PIN_B0|PIN_B1|PIN_B2|PIN_B3|PIN_B4|PIN_B5|PIN_B6 {lexeme=yytext(); line=yyline; 
 //
 ({LETRA}+"."{DIGITO}+) {lexeme=yytext(); line=yyline; return ERRORL_010;}
 
-//Error por defecto
+//Nuevos Errores
+//Un numero no debe comenzar con simbolos especiales
+({ACENTO}|{SIMBOLO}){DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return ERRORL_011;}
+
+////Un numero no debe contener simbolos especiales
+{DIGITO}+({ACENTO}|{SIMBOLO}){DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return ERRORL_012;}
+
+////Un numero no debe comenzar con guion bajo
+"_"{DIGITO}+|({SIGNO}"_"{DIGITO}+) |("_"{DIGITO}+"."{DIGITO}+) | (("_"{DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return ERRORL_013;}
+
+//Un identificador no comienza con guin bajo
+"_"{DIGITO}+({LETRA}|{DIGITO}|"_")* {lexeme=yytext(); line=yyline; return ERRORL_014;}
+
+//Un numero no debe contener letras
+({DIGITO}+{LETRA}+) {lexeme=yytext(); line=yyline; return ERRORL_015;}
+
+//Un identificador no puede contener puntos
+{LETRA}"."({LETRA}|{DIGITO}|_)*|{LETRA}({LETRA}"."|{DIGITO}|_)*|{LETRA}({LETRA}|{DIGITO}"."|_)* {lexeme=yytext(); line=yyline; return ERRORL_016;}
+///Error por defecto
 . {lexeme=yytext(); line=yyline; return ERRORL_000;} 

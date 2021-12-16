@@ -27,8 +27,13 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 import Backend.*;
 import java.io.IOException;
+import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_cup.runtime.Symbol;
 /**
  *
  * @author Cristopher
@@ -41,11 +46,14 @@ public class Interfaz extends javax.swing.JFrame {
     V_Identificadores ventanaid = new V_Identificadores(this, rootPaneCheckingEnabled);
         
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
-    //String rutaLexer = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Lexer.flex";
+    String rutaLexer = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Lexer.flex";
+    
+    String ruta2 = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\LexerCup.flex";
+    String[] rutas = {"-parser","Sintax","D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Sintax.cup"};
     
     
     
-    public Interfaz() {
+    public Interfaz() throws Exception {
         initComponents();
         this.setTitle("Compilador LEATE");
         setIconImage(new ImageIcon(getClass().getResource("/Frontend/Imagenes/Logo.png")).getImage());
@@ -61,7 +69,7 @@ public class Interfaz extends javax.swing.JFrame {
         cerrar();
         //Crear el LEXER (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
         //generarLexer(rutaLexer);
-       
+        Generar(rutaLexer, ruta2, rutas);
     }
     
      public static void generarLexer(String ruta){
@@ -70,6 +78,38 @@ public class Interfaz extends javax.swing.JFrame {
 
     }
      
+    public static void Generar(String ruta1, String ruta2, String[] rutaS) throws IOException, Exception{
+        File archivo;
+        archivo = new File(ruta1);
+        JFlex.Main.generate(archivo);
+        archivo = new File(ruta2);
+        JFlex.Main.generate(archivo);
+        java_cup.Main.main(rutaS);
+        
+        Path rutaSym = Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\sym.java");
+        if (Files.exists(rutaSym)){
+            Files.delete(rutaSym);
+        }
+        
+        Files.move(
+                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\sym.java"),
+                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\sym.java")
+        );
+        
+        Path rutaSin = Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Sintax.java");
+        if (Files.exists(rutaSin)){
+            Files.delete(rutaSin);
+        }
+        Files.move(
+                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\Sintax.java"),
+                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Sintax.java")
+        );
+    }
+     
+    public static void pruebaAnalisis(String x, Object tt){
+        PanelSalida.setText("Funciona:"+x+tt);
+    }
+    
      public void tablaLexemas() throws IOException{
         Object []O = new Object[3];
         Object []I = new Object[4];
@@ -116,72 +156,252 @@ public class Interfaz extends javax.swing.JFrame {
                              result += "*Error Lexico 009. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" No se admiten comas(,) en la estructura de los numeros\n";
                             break;
                     case ERRORL_010:
-                             result += "*Error Lexico 011. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" No se admiten puntos(.) en el nombre del identificador.\n";
+                             result += "*Error Lexico 010. "+"Linea "+lex.line+": Identificador no valido"+"["+lex.lexeme+"]."+" No se admiten puntos(.) en el nombre del identificador.\n";
+                            break;
+                    case ERRORL_011:
+                             result += "*Error Lexico 011. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" Un numero no debe comenzar con simbolos especiales.\n";
+                            break;
+                    case ERRORL_012:
+                             result += "*Error Lexico 012. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" Un numero no debe contener simbolos especiales.\n";
+                            break;
+                    case ERRORL_013:
+                             result += "*Error Lexico 013. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" Un numero no debe comenzar con guion bajo.\n";
+                            break;
+                    case ERRORL_014:
+                             result += "*Error Lexico 014. "+"Linea "+lex.line+": Identificador Ilegal"+"["+lex.lexeme+"]."+" El identificador no debe comenzar con guion bajo.\n";
+                            break;
+                    case ERRORL_015:
+                             result += "*Error Lexico 015. "+"Linea "+lex.line+": Numero no valido"+"["+lex.lexeme+"]."+" Un numero no debe contener letras.\n";
+                            break;
+                    case ERRORL_016:
+                             result += "*Error Lexico 016. "+"Linea "+lex.line+": Identificador ilegal"+"["+lex.lexeme+"]."+" Un identificador no debe contener puntos.\n";
                             break;
                     case ERRORL_000:
-                             result += "*Error Lexico no Identificado. "+"Linea "+lex.line+"["+lex.lexeme+"]."+" Revise su codigo.\n";
+                             result += "*Error Lexico no Identificado. "+"Linea "+lex.line+" ["+lex.lexeme+"]."+" Revise su codigo.\n";
                             break;
-                    case Reservada: 
+                    case retnot:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                   case TK_Sig_Punt:
+                    case For:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                        case TK_Sig_Agrup:
+                    case While:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
-                            break;
-                        case TK_Op_Incremento:
+                            break;                            
+                    case If:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                        case TK_Op_Disminucion:
+                    case delay_ms:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                        case TK_Op_Relacional:
+                    case star:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                        case TK_Op_Arit:
+                    case Else:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                         case TK_Op_Logi:
+                    case T_dato:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Tipo de dato";
                              v.lex.addRow(O);
                             break;
-                        case TK_Op_Desigual:
+                    case pulsa:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                        case TK_Op_Asig:
+                    case output_N:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
-                             O[2] = tokens;
+                             O[2] = "Palabra Reservada";
                              v.lex.addRow(O);
                             break;
-                        case IDENTIFICADOR:
+                    case Kp_Teclado:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case KeyPlayed:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case Display:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case Final:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case event:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case caso:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case output_high:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case output_low:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case pines_B:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Palabra Reservada";
+                             v.lex.addRow(O);
+                            break;
+                    case Sig_Agru:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case dosPuntos:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case coma:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case Llave_a:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case Llave_c:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case Corchete_a:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case Corchete_c:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case parentesis_a:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case parentesis_c:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case TK_punto:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Signo de agrupació";
+                             v.lex.addRow(O);
+                            break;
+                    case Op_incremento:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador incremento";
+                             v.lex.addRow(O);
+                            break;
+                    case Op_decremento:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador decremento";
+                             v.lex.addRow(O);
+                            break;
+                    case Op_relacional:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador relacional";
+                             v.lex.addRow(O);
+                            break;
+                    case Op_Suma:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador aritmetico";
+                             v.lex.addRow(O);
+                            break;
+                    case Op_Resta:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador aritmetico";
+                             v.lex.addRow(O);
+                            break;
+                    case Op_Multiplicacion:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador aritmetico";
+                             v.lex.addRow(O);
+                            break;
+                    case Op_asig:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador asignación";
+                             v.lex.addRow(O);
+                            break;
+                    case P_coma:
+                             O[0] = lex.line;
+                             O[1] = lex.lexeme;
+                             O[2] = "Operador fin de sentencia";
+                             v.lex.addRow(O);
+                            break;
+                        case Identificador:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
                              O[2] = tokens;
@@ -204,7 +424,7 @@ public class Interfaz extends javax.swing.JFrame {
                                  ventanaid.identi.setValueAt(lex.line, existeAqui, 3);
                              }
                             break;
-                        case Num:
+                        case Numero:
                              O[0] = lex.line;
                              O[1] = lex.lexeme;
                              O[2] = tokens;
@@ -217,6 +437,19 @@ public class Interfaz extends javax.swing.JFrame {
             }//while
         } catch (Exception e) {
             Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE,null,e);
+        }
+    }
+     
+    public void analisisSintactico(){
+        String ST = PanelFuente.getText();
+        Sintax s = new Sintax(new Backend.LexerCup(new StringReader(ST)));
+        
+        try {
+            s.parse();
+            PanelSalida.setText("Todo bien");
+        } catch (Exception e) {
+            Symbol sym = s.getS();
+            PanelSalida.setText("Error:"+(sym.right+1)+"simbolo: "+sym.value);
         }
     }
      
@@ -487,6 +720,11 @@ public class Interfaz extends javax.swing.JFrame {
         jButton6.setName(""); // NOI18N
         jButton6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Analisis sintactico - select.png"))); // NOI18N
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton6);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Barra de aceesos rapidos 3.png"))); // NOI18N
@@ -725,6 +963,10 @@ public class Interfaz extends javax.swing.JFrame {
         ventanaid.setVisible(true);
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        analisisSintactico();
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     public void abrirsintexto(){
         //Metodo si no hay texto en el panel fuente para el boton abrir
            JFileChooser abrir = new JFileChooser();
@@ -813,7 +1055,11 @@ public class Interfaz extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Interfaz().setVisible(true);
+                try {
+                    new Interfaz().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

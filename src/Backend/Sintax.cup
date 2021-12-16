@@ -1,6 +1,7 @@
 
 package Backend;
 import java_cup.runtime.Symbol;
+import Frontend.Interfaz.*;
 
 parser code
 {:
@@ -13,16 +14,162 @@ parser code
     public Symbol getS(){
         return this.s;
     }
-
+    
+    public void report_error(String msm, Object valor){ 
+        Frontend.Interfaz.PanelSalida.setText("Funciona:"+valor);
+    }
+    
 :};
 
-terminal retnot,for,while,if,delay_ms,start,else,pulsa,output_N,KP_Z,KP_X,KP_C,
-        KP_V,KP_B,KP_N,KP_M,KeyPlayed,Display,Final,event,caso,output_high,output_low,
-        PIN_B0,PIN_B1,PIN_B2,PIN_B3,PIN_B4,PIN_B5,PIN_B6,T_dato,Op_asig,Op_Suma,Op_Resta,
-        Op_Multiplicacion,Op_Division,Op_relacional,Op_incremento,Parentesis_a,Parentesis_c,
-        Llave_a,Llave_c,Corchete_a,Corchete_c,P_coma,dosPuntos,coma,Identificador,Numero,ERROR
+terminal retnot,For,While,If,delay_ms,star,Else,pulsa,output_N,KeyPlayed,Display,Final,event,caso,output_high,output_low,
+        pines_B,T_dato,Op_asig,Op_Suma,Op_Resta,Op_Multiplicacion,Op_Division,Op_relacional,Op_in_de_cremento,parentesis_a,parentesis_c,
+        Llave_a,Llave_c,Corchete_a,Corchete_c,P_coma,dosPuntos,Identificador,Numero,ERRORL_000,Kp_Teclado,Sig_Agru,TK_punto,
+        Op_decremento,coma
 ;
 
-non terminal 
+non terminal INICIO,DECLARACION,N_METODO,SENTENCIAS_R,N_WHILE,SENTENCIAS_W,N_OUTPUT,N_CONTROLAR,
+             DECLARACION_W, N_IF,SENTENCIAS_IF,N_FOR,SENTENCIAS_FOR,N_IF_ELSE,SENTENCIAS_EVENT,SENTENCIAS_E,
+             SENTENCIAS_C,M_START,SENTENCIA_ST,N_KEYP,N_DISPLAY,DECLARACION_N_METODO           
+;
+
+start with INICIO;
+
+INICIO ::= 
+            INICIO DECLARACION| DECLARACION |
+            INICIO N_METODO | N_METODO |
+            INICIO N_KEYP | N_KEYP |
+            INICIO M_START | M_START 
+;
+
+DECLARACION ::= 
+                Final T_dato Identificador:sen {:System.out.print(sen);:} P_coma  |
+                Final T_dato Identificador Op_asig Numero P_coma |
+                T_dato Identificador P_coma |
+                T_dato Identificador Op_asig Numero P_coma
+;
+
+N_METODO ::= 
+            retnot Identificador parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c
+				
+;
+
+DECLARACION_N_METODO ::= 
+            Final T_dato:x Identificador:sen {::} P_coma  |
+            Final T_dato Identificador Op_asig Numero P_coma |
+            T_dato Identificador P_coma |
+            T_dato Identificador Op_asig Numero P_coma
+;
+
+SENTENCIAS_R ::= 
+                SENTENCIAS_R N_WHILE | N_WHILE |
+                SENTENCIAS_R N_IF | N_IF |
+                SENTENCIAS_R N_FOR | N_FOR|
+                SENTENCIAS_R N_IF_ELSE | N_IF_ELSE |
+                SENTENCIAS_R DECLARACION_N_METODO | DECLARACION_N_METODO |
+                SENTENCIAS_EVENT 
+;
+
+N_WHILE ::=
+            While parentesis_a Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c |
+            While parentesis_a Numero Op_relacional Numero parentesis_c Llave_a SENTENCIAS_W Llave_c |
+            While parentesis_a Identificador Op_relacional Numero parentesis_c Llave_a SENTENCIAS_W Llave_c |
+            While parentesis_a Numero Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c 
+;
+
+SENTENCIAS_W ::= 
+                SENTENCIAS_W N_OUTPUT | N_OUTPUT |
+                SENTENCIAS_W N_CONTROLAR | N_CONTROLAR |
+                SENTENCIAS_W DECLARACION_W | DECLARACION_W 
+;
+
+N_OUTPUT ::= 
+            output_N parentesis_a pines_B Sig_Agru Identificador parentesis_c P_coma
+;
+
+N_CONTROLAR ::= 
+                Identificador parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma |
+                Identificador parentesis_a Numero Sig_Agru Numero parentesis_c P_coma
+;
+
+DECLARACION_W ::=
+                Identificador Op_asig Identificador Op_Resta Numero P_coma |
+                Identificador Op_asig Identificador Op_Suma Numero P_coma |
+                Identificador Op_asig Identificador Op_Multiplicacion Numero P_coma |
+                Identificador Op_asig Identificador Op_Division Numero P_coma 
+;
+
+N_IF ::= 
+        If parentesis_a Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_IF Llave_c |
+        If parentesis_a Numero Op_relacional Numero parentesis_c Llave_a SENTENCIAS_IF Llave_c |
+        If parentesis_a Kp_Teclado Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_IF Llave_c |
+        If parentesis_a Kp_Teclado Op_relacional Numero parentesis_c Llave_a SENTENCIAS_IF Llave_c
 
 ;
+
+SENTENCIAS_IF ::= 
+                SENTENCIAS_IF N_OUTPUT | N_OUTPUT |
+                SENTENCIAS_IF N_CONTROLAR | N_CONTROLAR |
+                SENTENCIAS_IF DECLARACION_W | DECLARACION_W 
+                
+					
+;
+
+N_FOR ::= 
+        For parentesis_a Identificador Op_asig Identificador P_coma Identificador Op_relacional Identificador P_coma Op_in_de_cremento parentesis_c Llave_a SENTENCIAS_FOR Llave_c |
+        For parentesis_a T_dato Identificador Op_asig Identificador P_coma Identificador Op_relacional Identificador P_coma Op_in_de_cremento parentesis_c Llave_a SENTENCIAS_FOR Llave_c |
+        For parentesis_a Identificador Op_asig Numero P_coma Identificador Op_relacional Numero P_coma Op_in_de_cremento parentesis_c Llave_a SENTENCIAS_FOR Llave_c
+;
+
+SENTENCIAS_FOR ::= 
+                SENTENCIAS_FOR N_OUTPUT | N_OUTPUT |
+                SENTENCIAS_FOR N_CONTROLAR | N_CONTROLAR |
+                SENTENCIAS_FOR DECLARACION_W | DECLARACION_W
+;
+
+N_IF_ELSE ::= 
+            If parentesis_a Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_IF Llave_c Else N_IF|
+            If parentesis_a Numero Op_relacional Numero parentesis_c Llave_a SENTENCIAS_IF Llave_c Else N_IF |
+            If parentesis_a Kp_Teclado Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_IF Llave_c Else N_IF |
+            If parentesis_a Kp_Teclado Op_relacional Numero parentesis_c Llave_a SENTENCIAS_IF Llave_c Else N_IF
+;
+
+SENTENCIAS_EVENT ::= 
+                    event parentesis_a Identificador parentesis_c Llave_a SENTENCIAS_E Llave_c
+;
+
+SENTENCIAS_E ::= 
+                caso Numero dosPuntos SENTENCIAS_C 
+;
+
+SENTENCIAS_C ::= 
+                output_high parentesis_a pines_B parentesis_c P_coma SENTENCIAS_E | output_high parentesis_a pines_B parentesis_c P_coma |
+                output_low parentesis_a pines_B parentesis_c P_coma SENTENCIAS_E | output_low parentesis_a pines_B parentesis_c P_coma |
+                delay_ms parentesis_a Identificador parentesis_c P_coma SENTENCIAS_E | delay_ms parentesis_a Identificador parentesis_c P_coma |
+                output_high parentesis_a pines_B parentesis_c P_coma SENTENCIAS_C | output_low parentesis_a pines_B parentesis_c P_coma SENTENCIAS_C | 
+                delay_ms parentesis_a Identificador parentesis_c P_coma SENTENCIAS_C
+;
+
+M_START ::= 			
+            retnot star parentesis_a parentesis_c Llave_a SENTENCIA_ST Llave_c
+;
+
+SENTENCIA_ST ::= 
+                SENTENCIA_ST Identificador parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma | 
+                Identificador parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma |
+                SENTENCIA_ST Identificador parentesis_a Numero Sig_Agru Numero parentesis_c P_coma | 
+                Identificador parentesis_a Numero Sig_Agru Numero parentesis_c P_coma |
+                SENTENCIA_ST Identificador parentesis_a Identificador Sig_Agru Numero parentesis_c P_coma |
+                Identificador parentesis_a Identificador Sig_Agru Numero parentesis_c P_coma |
+                SENTENCIA_ST Identificador parentesis_a Numero Sig_Agru Identificador parentesis_c P_coma |
+                Identificador parentesis_a Numero Sig_Agru Identificador parentesis_c P_coma
+;					
+					
+N_KEYP ::= 
+        KeyPlayed parentesis_a pulsa Identificador parentesis_c Llave_a N_DISPLAY N_IF_ELSE Llave_c |
+        KeyPlayed parentesis_a pulsa Identificador parentesis_c Llave_a N_IF_ELSE Llave_c |
+        KeyPlayed parentesis_a pulsa Identificador parentesis_c Llave_a N_IF Llave_c
+;
+			
+N_DISPLAY ::= 
+            Display parentesis_a parentesis_c P_coma
+;	

@@ -10,6 +10,7 @@ package Backend;
  * @author Cristopher
  */
 public enum Tokens {
+    /*
     Reservada("Reservada"),
     TK_Sig_Punt("Signo Puntuación"),
     TK_Sig_Agrup("Signo Agrupación"),
@@ -35,8 +36,64 @@ public enum Tokens {
     ERRORL_008("Error Lexico 008"),
     ERRORL_009("Error Lexico 009"),
     ERRORL_010("Error Lexico 010");
-    
-    String nombre;
-    Tokens(String pNombre){nombre = pNombre;}
-    public String getNombre() { return nombre; }    
+    */
+    //DUPLICADO PARA ANALISIS SINTACTICO
+    retnot,
+    For,
+    While,
+    If,
+    delay_ms,
+    star,
+    Else,
+    T_dato,
+    pulsa,
+    output_N,
+    Kp_Teclado,
+    KeyPlayed,
+    Display,
+    Final,
+    event,
+    caso,
+    output_high,
+    output_low,
+    pines_B,
+    Sig_Agru,
+    dosPuntos,
+    coma,
+    Llave_a,
+    Llave_c,
+    Corchete_a,
+    Corchete_c,
+    parentesis_a,
+    parentesis_c,
+    TK_punto,
+    Op_incremento,
+    Op_decremento,
+    Op_relacional,
+    Op_Suma,
+    Op_Resta,
+    Op_Multiplicacion,
+    Op_Division,
+    Op_asig,
+    P_coma,
+    Identificador,
+    Numero,
+    ERRORL_000,
+    ERRORL_001,
+    ERRORL_002,
+    ERRORL_003,
+    ERRORL_004,
+    ERRORL_005,
+    ERRORL_006,
+    ERRORL_007,
+    ERRORL_008,
+    ERRORL_009,
+    ERRORL_010,
+    ERRORL_011,
+    ERRORL_012,
+    ERRORL_013,
+    ERRORL_014,
+    ERRORL_015,
+    ERRORL_016;
+     
 }
