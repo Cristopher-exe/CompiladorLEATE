@@ -597,7 +597,7 @@ public class Interfaz extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnGuardarComo = new javax.swing.JButton();
         btnAnalisisLexico = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnAnalisisSintactico = new javax.swing.JButton();
         btnCompilar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -719,22 +719,22 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jToolBar1.add(btnAnalisisLexico);
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Analisis sintactico.png"))); // NOI18N
-        jButton6.setToolTipText("Analisis Sintactico");
-        jButton6.setBorder(null);
-        jButton6.setBorderPainted(false);
-        jButton6.setContentAreaFilled(false);
-        jButton6.setFocusable(false);
-        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton6.setName(""); // NOI18N
-        jButton6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Analisis sintactico - select.png"))); // NOI18N
-        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btnAnalisisSintactico.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Analisis sintactico.png"))); // NOI18N
+        btnAnalisisSintactico.setToolTipText("Analisis Sintactico");
+        btnAnalisisSintactico.setBorder(null);
+        btnAnalisisSintactico.setBorderPainted(false);
+        btnAnalisisSintactico.setContentAreaFilled(false);
+        btnAnalisisSintactico.setFocusable(false);
+        btnAnalisisSintactico.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnAnalisisSintactico.setName(""); // NOI18N
+        btnAnalisisSintactico.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Analisis sintactico - select.png"))); // NOI18N
+        btnAnalisisSintactico.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnAnalisisSintactico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btnAnalisisSintacticoActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton6);
+        jToolBar1.add(btnAnalisisSintactico);
 
         btnCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/compilar.png"))); // NOI18N
         btnCompilar.setToolTipText("Compilar");
@@ -1019,9 +1019,10 @@ public class Interfaz extends javax.swing.JFrame {
         ventanaid.setVisible(true);
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void btnAnalisisSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisSintacticoActionPerformed
         analisisSintactico();
-    }//GEN-LAST:event_jButton6ActionPerformed
+        cambiarAmbitos();
+    }//GEN-LAST:event_btnAnalisisSintacticoActionPerformed
 
     private void btnMenuVariablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuVariablesActionPerformed
         v.setVisible(true);
@@ -1176,6 +1177,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem bntMenuIdentificadores;
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnAnalisisLexico;
+    private javax.swing.JButton btnAnalisisSintactico;
     private javax.swing.JButton btnCompilar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardarComo;
@@ -1188,7 +1190,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnmenuGuardarComo;
     private javax.swing.JMenuItem btnmenuNuevo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

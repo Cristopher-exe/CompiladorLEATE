@@ -48,7 +48,7 @@ public class V_Identificadores extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Identificador", "Tipo", "Valor", "Linea"
+                "Identificador", "Tipo", "Valor", "Linea", "Ambito"
             }
         ));
         jScrollPane1.setViewportView(tablaIdentificadores);
