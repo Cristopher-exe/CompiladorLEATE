@@ -147,29 +147,29 @@ DECLARACION ::=
                 Final error Identificador P_coma {:report_error("002","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|         
                 Final T_dato error P_coma {:report_error("003","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
                 Final T_dato Identificador error {:report_error("004","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
-                Final T_dato Identificador Op_asig error P_coma {:report_error("009","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
-                Final T_dato Identificador Op_asig Numero error {:report_error("010","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
-                error Identificador P_coma {:report_error("002","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato error P_coma {:report_error("012","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                error Identificador Op_asig Numero P_coma {:report_error("014","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato Identificador error Numero P_coma {:report_error("013","Operador de asignacion incorrecto, se espera: (=)",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato error Op_asig Numero P_coma {:report_error("013","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato Identificador Op_asig error P_coma {:report_error("017","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}
+                Final T_dato Identificador Op_asig error P_coma {:report_error("005","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
+                Final T_dato Identificador Op_asig Numero error {:report_error("006","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
+                error Identificador P_coma {:report_error("007","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato error P_coma {:report_error("008","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                error Identificador Op_asig Numero P_coma {:report_error("009","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato Identificador error Numero P_coma {:report_error("010","Operador de asignacion incorrecto, se espera: (=)",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato error Op_asig Numero P_coma {:report_error("011","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato Identificador Op_asig error P_coma {:report_error("012","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}
 ;                
 
 N_METODO ::= 
             retnot Identificador:nm parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {:añadirANm(nm.toString()); insertarIdentificadores(nm.toString()+"()", "", 0, nmright+1, "IDFUNCION"); numeroMetodo++;:}|
             retnot Identificador:nm parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a /*epsilon*/ Llave_c {:añadirANm(nm.toString()); insertarIdentificadores(nm.toString()+"()", "", 0, nmright+1, "IDFUNCION"); numeroMetodo++;:}|
-            error Identificador parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("019","Inicio de metodo incorrecto, se espera: (retnot)",tokenError); RESULT = new Symbol(-1); :}|
-            retnot error parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("020","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador error T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("021","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador parentesis_a error Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("022","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador parentesis_a T_dato error Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("023","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador parentesis_a T_dato Identificador error T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("024","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador parentesis_a T_dato Identificador Sig_Agru error Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("025","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador parentesis_a T_dato Identificador Sig_Agru T_dato error parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("026","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador parentesis_a T_dato Identificador Sig_Agru T_dato Identificador error Llave_a SENTENCIAS_R Llave_c {: report_error("027","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1); :}|
-            retnot Identificador parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c error SENTENCIAS_R Llave_c {: report_error("028","Llave de apertura incorrecto, se espera: {",tokenError); RESULT = new Symbol(-1); :}   				
+            error Identificador parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("013","Inicio de metodo incorrecto, se espera: (retnot)",tokenError); RESULT = new Symbol(-1); :}|
+            retnot error parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("014","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador error T_dato Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("015","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador parentesis_a error Identificador Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("016","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador parentesis_a T_dato error Sig_Agru T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("017","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador parentesis_a T_dato Identificador error T_dato Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("018","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador parentesis_a T_dato Identificador Sig_Agru error Identificador parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("019","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador parentesis_a T_dato Identificador Sig_Agru T_dato error parentesis_c Llave_a SENTENCIAS_R Llave_c {: report_error("020","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador parentesis_a T_dato Identificador Sig_Agru T_dato Identificador error Llave_a SENTENCIAS_R Llave_c {: report_error("021","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1); :}|
+            retnot Identificador parentesis_a T_dato Identificador Sig_Agru T_dato Identificador parentesis_c error SENTENCIAS_R Llave_c {: report_error("022","Llave de apertura incorrecto, se espera: {",tokenError); RESULT = new Symbol(-1); :}   				
 ;
 
 SENTENCIAS_R ::= 
@@ -194,18 +194,18 @@ DECLARACION_N_METODO ::=
                 T_dato:tdato Identificador:id P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), 0, idright+1, numeroMetodo+"");:}|
                 T_dato:tdato Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, numeroMetodo+"");:}|
                 T_dato:tdato Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, numeroMetodo+"");:}|
-                error T_dato Identificador P_coma {:report_error("001","Modificador de acceso incorrecto se espera: (Final)",tokenError); RESULT = new Symbol(-1);:}|
-                Final error Identificador P_coma {:report_error("002","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
-                Final T_dato error P_coma {:report_error("003","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                Final T_dato Identificador error {:report_error("004","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
-                Final T_dato Identificador Op_asig error P_coma {:report_error("009","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
-                Final T_dato Identificador Op_asig Numero error {:report_error("010","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
-                error Identificador P_coma {:report_error("002","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato error P_coma {:report_error("012","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                error Identificador Op_asig Numero P_coma {:report_error("014","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato Identificador error Numero P_coma {:report_error("013","Operador de asignacion incorrecto, se espera: (=)",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato error Op_asig Numero P_coma {:report_error("013","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                T_dato Identificador Op_asig error P_coma {:report_error("017","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}
+                error T_dato Identificador P_coma {:report_error("023","Modificador de acceso incorrecto se espera: (Final)",tokenError); RESULT = new Symbol(-1);:}|
+                Final error Identificador P_coma {:report_error("024","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
+                Final T_dato error P_coma {:report_error("025","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                Final T_dato Identificador error {:report_error("026","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
+                Final T_dato Identificador Op_asig error P_coma {:report_error("027","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
+                Final T_dato Identificador Op_asig Numero error {:report_error("028","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
+                error Identificador P_coma {:report_error("029","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato error P_coma {:report_error("030","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                error Identificador Op_asig Numero P_coma {:report_error("031","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato Identificador error Numero P_coma {:report_error("032","Operador de asignacion incorrecto, se espera: (=)",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato error Op_asig Numero P_coma {:report_error("033","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                T_dato Identificador Op_asig error P_coma {:report_error("034","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}
 ;
 
 
@@ -218,13 +218,13 @@ N_WHILE ::=
             While parentesis_a Numero Op_relacional Numero parentesis_c Llave_a /*epsilon*/ Llave_c|
             While parentesis_a Identificador Op_relacional Numero parentesis_c Llave_a /*epsilon*/ Llave_c|
             While parentesis_a Numero Op_relacional Identificador parentesis_c Llave_a /*epsilon*/ Llave_c|            
-            error parentesis_a Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("049","Sentencia incorrecta, se espera: (While)",tokenError); RESULT = new Symbol(-1);:}|
-            While error Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("050","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-            While parentesis_a error Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("051","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-            While parentesis_a Identificador error Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("052","Operador relacional incorrecto, se espera: (<,>,>=,<=,!=,==)",tokenError); RESULT = new Symbol(-1);:}|
-            While parentesis_a Identificador Op_relacional error parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("053","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-            While parentesis_a Identificador Op_relacional Identificador error Llave_a SENTENCIAS_W Llave_c {:report_error("054","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
-            While parentesis_a Identificador Op_relacional Identificador parentesis_c error SENTENCIAS_W Llave_c {:report_error("055","Llave de apertura incorrecto, se espera: {",tokenError); RESULT = new Symbol(-1);:}            
+            error parentesis_a Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("035","Sentencia incorrecta, se espera: (While)",tokenError); RESULT = new Symbol(-1);:}|
+            While error Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("036","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+            While parentesis_a error Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("037","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+            While parentesis_a Identificador error Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("038","Operador relacional incorrecto, se espera: (<,>,>=,<=,!=,==)",tokenError); RESULT = new Symbol(-1);:}|
+            While parentesis_a Identificador Op_relacional error parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("039","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+            While parentesis_a Identificador Op_relacional Identificador error Llave_a SENTENCIAS_W Llave_c {:report_error("040","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
+            While parentesis_a Identificador Op_relacional Identificador parentesis_c error SENTENCIAS_W Llave_c {:report_error("041","Llave de apertura incorrecto, se espera: {",tokenError); RESULT = new Symbol(-1);:}            
 ;
 
 SENTENCIAS_W ::= 
@@ -235,22 +235,22 @@ SENTENCIAS_W ::=
 
 N_OUTPUT ::= 
             output_N parentesis_a pines_B Sig_Agru Identificador parentesis_c P_coma|        
-            error parentesis_a pines_B Sig_Agru Identificador parentesis_c P_coma {:report_error("057","Metodo Incorrecto, se espera: (output_N)",tokenError); RESULT = new Symbol(-1);:}|
-            output_N error pines_B Sig_Agru Identificador parentesis_c P_coma {:report_error("058","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-            output_N parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("059","Contante incorrecta, se espera: (del PIN_0 al PIN_6)",tokenError); RESULT = new Symbol(-1);:}|
-            output_N parentesis_a pines_B error Identificador parentesis_c P_coma {:report_error("060","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
-            output_N parentesis_a pines_B Sig_Agru error parentesis_c P_coma {:report_error("061","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-            output_N parentesis_a pines_B Sig_Agru Identificador error P_coma {:report_error("062","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}
+            error parentesis_a pines_B Sig_Agru Identificador parentesis_c P_coma {:report_error("042","Metodo Incorrecto, se espera: (output_N)",tokenError); RESULT = new Symbol(-1);:}|
+            output_N error pines_B Sig_Agru Identificador parentesis_c P_coma {:report_error("043","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+            output_N parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("044","Contante incorrecta, se espera: (del PIN_0 al PIN_6)",tokenError); RESULT = new Symbol(-1);:}|
+            output_N parentesis_a pines_B error Identificador parentesis_c P_coma {:report_error("045","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
+            output_N parentesis_a pines_B Sig_Agru error parentesis_c P_coma {:report_error("046","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+            output_N parentesis_a pines_B Sig_Agru Identificador error P_coma {:report_error("047","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}
 ;
 
 N_CONTROLAR ::= 
                 Identificador parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma|
                 Identificador parentesis_a Numero Sig_Agru Numero parentesis_c P_coma|                
-                error parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("064","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador error Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("065","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("066","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador parentesis_a Identificador error Identificador parentesis_c P_coma {:report_error("067","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador parentesis_a Identificador Sig_Agru Identificador error P_coma {:report_error("068","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}
+                error parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("048","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador error Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("049","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("050","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador parentesis_a Identificador error Identificador parentesis_c P_coma {:report_error("051","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador parentesis_a Identificador Sig_Agru Identificador error P_coma {:report_error("052","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}
 ;
 
 DECLARACION_W ::=
@@ -258,13 +258,13 @@ DECLARACION_W ::=
                 Identificador Op_asig Identificador Op_Suma Numero P_coma|
                 Identificador Op_asig Identificador Op_Multiplicacion Numero P_coma|
                 Identificador Op_asig Identificador Op_Division Numero P_coma|
-                Identificador error Identificador Op_Resta Numero P_coma {:report_error("071","Operador de asignacion incorrecto, se espera (=)",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador Op_asig error Op_Resta Numero P_coma {:report_error("072","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador Op_asig Identificador error Numero P_coma {:report_error("073","Operador incorrecto, se espera un operador aritmetico valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador Op_asig Identificador Op_Resta error P_coma {:report_error("074","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador Op_asig Identificador Op_Suma error P_coma {:report_error("075","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador Op_asig Identificador Op_Multiplicacion error P_coma {:report_error("076","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador Op_asig Identificador Op_Division error P_coma {:report_error("077","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}
+                Identificador error Identificador Op_Resta Numero P_coma {:report_error("053","Operador de asignacion incorrecto, se espera (=)",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador Op_asig error Op_Resta Numero P_coma {:report_error("054","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador Op_asig Identificador error Numero P_coma {:report_error("055","Operador incorrecto, se espera un operador aritmetico valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador Op_asig Identificador Op_Resta error P_coma {:report_error("056","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador Op_asig Identificador Op_Suma error P_coma {:report_error("057","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador Op_asig Identificador Op_Multiplicacion error P_coma {:report_error("058","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador Op_asig Identificador Op_Division error P_coma {:report_error("059","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}
 ;
 
 N_IF ::= 
@@ -277,12 +277,12 @@ N_IF ::=
         If parentesis_a Kp_Teclado Op_relacional Identificador parentesis_c Llave_a /*epsilon*/ Llave_c|
         If parentesis_a Kp_Teclado Op_relacional Numero parentesis_c Llave_a /*epsilon*/ Llave_c|
         error parentesis_a Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_IF Llave_c {:report_error("082","sentencia incorrecta, se espera: (If)",tokenError); RESULT = new Symbol(-1);:}|
-        If error Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("083","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-        If parentesis_a error Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("084","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-        If parentesis_a Identificador error Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("085","Operador relacional incorrecto, se espera: (<,>,>=,<=,!=,==)",tokenError); RESULT = new Symbol(-1);:}|
-        If parentesis_a Identificador Op_relacional error parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("086","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-        If parentesis_a Identificador Op_relacional Identificador error Llave_a SENTENCIAS_W Llave_c {:report_error("087","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
-        If parentesis_a Identificador Op_relacional Identificador parentesis_c error SENTENCIAS_W Llave_c {:report_error("088","Llave de apertura incorrecta, se espera: {",tokenError); RESULT = new Symbol(-1);:}
+        If error Identificador Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("060","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+        If parentesis_a error Op_relacional Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("061","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+        If parentesis_a Identificador error Identificador parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("062","Operador relacional incorrecto, se espera: (<,>,>=,<=,!=,==)",tokenError); RESULT = new Symbol(-1);:}|
+        If parentesis_a Identificador Op_relacional error parentesis_c Llave_a SENTENCIAS_W Llave_c {:report_error("063","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+        If parentesis_a Identificador Op_relacional Identificador error Llave_a SENTENCIAS_W Llave_c {:report_error("064","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
+        If parentesis_a Identificador Op_relacional Identificador parentesis_c error SENTENCIAS_W Llave_c {:report_error("065","Llave de apertura incorrecta, se espera: {",tokenError); RESULT = new Symbol(-1);:}
 ;
 
 N_FOR ::= 
@@ -307,11 +307,11 @@ N_IF_ELSE ::=
 SENTENCIAS_EVENT ::= 
                     event parentesis_a Identificador parentesis_c Llave_a SENTENCIAS_E Llave_c|
                     event parentesis_a Identificador parentesis_c Llave_a /*epsilon*/ Llave_c|
-                    error parentesis_a Identificador parentesis_c Llave_a SENTENCIAS_E Llave_c {:report_error("091","Sentencia incorrecta, se espera: (event)",tokenError); RESULT = new Symbol(-1);:}|
-                    event error Identificador parentesis_c Llave_a SENTENCIAS_E Llave_c {:report_error("092","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-                    event parentesis_a error parentesis_c Llave_a SENTENCIAS_E Llave_c {:report_error("093","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                    event parentesis_a Identificador error Llave_a SENTENCIAS_E Llave_c {:report_error("094","Parentesis de cierre incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-                    event parentesis_a Identificador parentesis_c error SENTENCIAS_E Llave_c {:report_error("095","Llave de apertura incorrecta, se espera: {",tokenError); RESULT = new Symbol(-1);:}
+                    error parentesis_a Identificador parentesis_c Llave_a SENTENCIAS_E Llave_c {:report_error("066","Sentencia incorrecta, se espera: (event)",tokenError); RESULT = new Symbol(-1);:}|
+                    event error Identificador parentesis_c Llave_a SENTENCIAS_E Llave_c {:report_error("067","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+                    event parentesis_a error parentesis_c Llave_a SENTENCIAS_E Llave_c {:report_error("068","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                    event parentesis_a Identificador error Llave_a SENTENCIAS_E Llave_c {:report_error("069","Parentesis de cierre incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+                    event parentesis_a Identificador parentesis_c error SENTENCIAS_E Llave_c {:report_error("070","Llave de apertura incorrecta, se espera: {",tokenError); RESULT = new Symbol(-1);:}
 ;
 
 SENTENCIAS_E ::= 
@@ -329,28 +329,28 @@ SENTENCIAS_C ::=
 M_START ::= 			
             retnot star parentesis_a parentesis_c Llave_a SENTENCIA_ST_2 Llave_c|
             retnot star parentesis_a parentesis_c Llave_a /*epsilon*/ Llave_c|
-            error star parentesis_a parentesis_c Llave_a SENTENCIA_ST_2 Llave_c {:report_error("101","Sentencia incorrecta, se espera: (retnot)",tokenError); RESULT = new Symbol(-1);:}|
-            retnot parentesis_a parentesis_c Llave_a SENTENCIA_ST_2 Llave_c {:report_error("102","Sentencia incorrecta, se espera: (star)",tokenError); RESULT = new Symbol(-1);:}|
-            retnot star error parentesis_c Llave_a SENTENCIA_ST_2 Llave_c {:report_error("103","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-            retnot star parentesis_a error Llave_a SENTENCIA_ST_2 Llave_c {:report_error("104","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
-            retnot star parentesis_a parentesis_c error SENTENCIA_ST_2 Llave_c {:report_error("105","Llave de apertura incorrecta, se espera: {",tokenError); RESULT = new Symbol(-1);:}
+            error star parentesis_a parentesis_c Llave_a SENTENCIA_ST_2 Llave_c {:report_error("071","Sentencia incorrecta, se espera: (retnot)",tokenError); RESULT = new Symbol(-1);:}|
+            retnot parentesis_a parentesis_c Llave_a SENTENCIA_ST_2 Llave_c {:report_error("072","Sentencia incorrecta, se espera: (star)",tokenError); RESULT = new Symbol(-1);:}|
+            retnot star error parentesis_c Llave_a SENTENCIA_ST_2 Llave_c {:report_error("073","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+            retnot star parentesis_a error Llave_a SENTENCIA_ST_2 Llave_c {:report_error("074","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
+            retnot star parentesis_a parentesis_c error SENTENCIA_ST_2 Llave_c {:report_error("075","Llave de apertura incorrecta, se espera: {",tokenError); RESULT = new Symbol(-1);:}
 ;
 					
 SENTENCIA_ST_2 ::= 
                 Identificador parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma|
                 Identificador parentesis_a Numero Sig_Agru Numero parentesis_c P_coma|                
-                error parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("064","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador error Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("065","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("066","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador parentesis_a Identificador error Identificador parentesis_c P_coma {:report_error("067","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
-                Identificador parentesis_a Identificador Sig_Agru Identificador error P_coma {:report_error("068","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
+                error parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("076","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador error Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("077","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("078","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador parentesis_a Identificador error Identificador parentesis_c P_coma {:report_error("079","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
+                Identificador parentesis_a Identificador Sig_Agru Identificador error P_coma {:report_error("080","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}|
                 SENTENCIA_ST_2 Identificador parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma|
                 SENTENCIA_ST_2 Identificador parentesis_a Numero Sig_Agru Numero parentesis_c P_coma|                
-                SENTENCIA_ST_2 error parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("064","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                SENTENCIA_ST_2 Identificador error Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("065","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
-                SENTENCIA_ST_2 Identificador parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("066","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
-                SENTENCIA_ST_2 Identificador parentesis_a Identificador error Identificador parentesis_c P_coma {:report_error("067","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
-                SENTENCIA_ST_2 Identificador parentesis_a Identificador Sig_Agru Identificador error P_coma {:report_error("068","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}               
+                SENTENCIA_ST_2 error parentesis_a Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("081","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                SENTENCIA_ST_2 Identificador error Identificador Sig_Agru Identificador parentesis_c P_coma {:report_error("082","Parentesis de apertura incorrecto, se espera: (",tokenError); RESULT = new Symbol(-1);:}|
+                SENTENCIA_ST_2 Identificador parentesis_a error Sig_Agru Identificador parentesis_c P_coma {:report_error("083","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
+                SENTENCIA_ST_2 Identificador parentesis_a Identificador error Identificador parentesis_c P_coma {:report_error("084","Signo de agrupacion incorrecto, se espera (?)",tokenError); RESULT = new Symbol(-1);:}|
+                SENTENCIA_ST_2 Identificador parentesis_a Identificador Sig_Agru Identificador error P_coma {:report_error("085","Parentesis de cierre incorrecto, se espera: )",tokenError); RESULT = new Symbol(-1);:}               
 ;               
 
 					
