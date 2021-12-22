@@ -167,7 +167,7 @@ public class Acercade extends javax.swing.JDialog {
     private void btnDocumentacióActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDocumentacióActionPerformed
         // TODO add your handling code here:
         try {
-            Desktop.getDesktop().browse(new URI("https://docs.google.com/document/d/1rDXTb4IDaNBJL-uoep0NUAyYV08nVBiCvEJU1kZ2rBw/edit?usp=sharing"));
+            Desktop.getDesktop().browse(new URI("https://drive.google.com/file/d/1C8FrCXNL3YyNhqDGAtD3dPVD63BAqPSr/view?usp=sharing"));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"ERROR, no se puede ejecutar la acción");
         }
