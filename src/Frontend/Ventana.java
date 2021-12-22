@@ -20,7 +20,7 @@ import Backend.*;
 public class Ventana extends javax.swing.JDialog {
 
     //Modelo para la tabla de lexemas
-    public DefaultTableModel lex;
+    public static DefaultTableModel lex;
     Guardar gdar = new Guardar();
     
     

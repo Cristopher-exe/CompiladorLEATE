@@ -52,7 +52,7 @@ COMENTUNILINEA = "#".*
 
 /* CONSTANTES DE TECLADO*/
 
-(KP_Z,KP_X,KP_C,KP_V,KP_B,KP_N,KP_M) {return new Symbol(sym.Kp_Teclado, yychar, yyline, yytext());}
+(KP_Z|KP_X|KP_C|KP_V|KP_B|KP_N|KP_M) {return new Symbol(sym.Kp_Teclado, yychar, yyline, yytext());}
 
 (KeyPlayed) {return new Symbol(sym.KeyPlayed, yychar, yyline, yytext());}
 
@@ -119,16 +119,15 @@ COMENTUNILINEA = "#".*
 
 (":") {return new Symbol(sym.dosPuntos, yychar, yyline, yytext());}
 
-(",") {return new Symbol(sym.coma, yychar, yyline, yytext());}
-
 (".") {return new Symbol(sym.TK_punto, yychar, yyline, yytext());}
 
 ("?") {return new Symbol(sym.Sig_Agru, yychar, yyline, yytext());}
 
+//PRODUCCIONES PARA ERRORES
 
 // |-------------------- RECONOCER EXPRESIONES --------------------| //
 //Identificadores
-{LETRA}({LETRA}|{DIGITO}|_)+ {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
+{LETRA}({LETRA}|{DIGITO}|_)* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
 
 //Num
 {DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {return new Symbol(sym.Numero, yychar, yyline, yytext());}

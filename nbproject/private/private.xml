@@ -6,13 +6,12 @@
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/Interfaz.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Lexer.flex</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/LexerCup.flex</file>
-            <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/V_Identificadores.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Sintax.java</file>
+            <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/V_Identificadores.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Sintax.cup</file>
-            <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/Ventana.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/lexer.java</file>
+            <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Frontend/Ventana.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/LexerCup.java</file>
-            <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/sym.java</file>
             <file>file:/D:/Cristopher/Documentos/NetBeansProjects/Compilador_LEATE/src/Backend/Tokens.java</file>
         </group>
     </open-files>

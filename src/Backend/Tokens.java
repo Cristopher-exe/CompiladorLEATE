@@ -59,7 +59,6 @@ public enum Tokens {
     pines_B,
     Sig_Agru,
     dosPuntos,
-    coma,
     Llave_a,
     Llave_c,
     Corchete_a,

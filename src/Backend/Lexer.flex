@@ -64,7 +64,6 @@ PIN_B6 {lexeme=yytext(); line=yyline; return pines_B;}
 ";" {lexeme=yytext(); line=yyline; return P_coma;}
 "." {lexeme=yytext(); line=yyline; return TK_punto;}
 ":" {lexeme=yytext(); line=yyline; return dosPuntos;}
-"," {lexeme=yytext(); line=yyline; return coma;}
 "{" {lexeme=yytext(); line=yyline; return Llave_a;}
 "}" {lexeme=yytext(); line=yyline; return Llave_c;}
 "[" {lexeme=yytext(); line=yyline; return Corchete_a;}

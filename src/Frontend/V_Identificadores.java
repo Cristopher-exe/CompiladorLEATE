@@ -5,7 +5,7 @@
  */
 package Frontend;
 
-import static Frontend.V_Identificadores.identi;
+//import static Frontend.V_Identificadores.identi;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -129,9 +129,9 @@ public class V_Identificadores extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public static javax.swing.JPanel jPanel1;
+    public static javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tablaIdentificadores;
     // End of variables declaration//GEN-END:variables
 }
