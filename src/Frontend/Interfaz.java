@@ -47,7 +47,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     NumeroLinea nl;
     Guardar gdar = new Guardar();
-    Ventana v = new Ventana(this, rootPaneCheckingEnabled);
+    public Ventana v = new Ventana(this, rootPaneCheckingEnabled);
     public V_Identificadores ventanaid = new V_Identificadores(this, rootPaneCheckingEnabled);
     Acercade ac = new Acercade(this, rootPaneCheckingEnabled);
     public static String errores_Producidos = "";
@@ -610,6 +610,7 @@ public class Interfaz extends javax.swing.JFrame {
         btnmenuAbrir = new javax.swing.JMenuItem();
         btnmenuGuardar = new javax.swing.JMenuItem();
         btnmenuGuardarComo = new javax.swing.JMenuItem();
+        btnLimpiarPS = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         btnMenuSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -754,12 +755,13 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jToolBar1.add(btnCompilar);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/Barra de aceesos rapidos 3.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/fondo  de aceesos rapidos.png"))); // NOI18N
         jButton1.setBorder(null);
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setMaximumSize(new java.awt.Dimension(563, 50));
         jButton1.setMinimumSize(new java.awt.Dimension(480, 50));
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton1);
@@ -814,6 +816,14 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jMenu1.add(btnmenuGuardarComo);
+
+        btnLimpiarPS.setText("Limpiar Panel Salida");
+        btnLimpiarPS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarPSActionPerformed(evt);
+            }
+        });
+        jMenu1.add(btnLimpiarPS);
         jMenu1.add(jSeparator1);
 
         btnMenuSalir.setText("Salir");
@@ -877,6 +887,7 @@ public class Interfaz extends javax.swing.JFrame {
         //validar si el panel esta vacio antes de crear un nuevo archivo
         if (PanelFuente.getText().isEmpty()) {
             PanelFuente.setText("");
+            PanelSalida.setText("");
             gdar.setURL("");
         } else {
             int num = JOptionPane.showConfirmDialog(null, "¿Deseas guardar el archivo?");
@@ -1022,6 +1033,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnAnalisisSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisSintacticoActionPerformed
         analisisSintactico();
         cambiarAmbitos();
+        ventanaid.setVisible(true);
     }//GEN-LAST:event_btnAnalisisSintacticoActionPerformed
 
     private void btnMenuVariablesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuVariablesActionPerformed
@@ -1066,9 +1078,16 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al llenar las tablas");
         } catch (Exception ex) {
-            Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error de programa");
         }
+        
+        v.setVisible(true);
+        ventanaid.setVisible(true);
     }//GEN-LAST:event_btnCompilarActionPerformed
+
+    private void btnLimpiarPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarPSActionPerformed
+        PanelSalida.setText("");
+    }//GEN-LAST:event_btnLimpiarPSActionPerformed
 
     public void abrirsintexto() {
         //Metodo si no hay texto en el panel fuente para el boton abrir
@@ -1181,6 +1200,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton btnCompilar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnGuardarComo;
+    private javax.swing.JMenuItem btnLimpiarPS;
     private javax.swing.JMenuItem btnMenuLEATE;
     private javax.swing.JMenuItem btnMenuSalir;
     private javax.swing.JMenuItem btnMenuVariables;
