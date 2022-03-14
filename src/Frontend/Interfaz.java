@@ -75,8 +75,8 @@ public class Interfaz extends javax.swing.JFrame {
         colors();
         cerrar();
         //Crear el LEXER (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
-        generarLexer(rutaLexer);
-        Generar(rutaLexer, ruta2, rutas);
+        //generarLexer(rutaLexer);
+        //Generar(rutaLexer, ruta2, rutas);
     }
 
     public static void generarLexer(String ruta) {
@@ -744,8 +744,6 @@ public class Interfaz extends javax.swing.JFrame {
         btnCompilar.setFocusPainted(false);
         btnCompilar.setFocusable(false);
         btnCompilar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCompilar.setMaximumSize(new java.awt.Dimension(60, 50));
-        btnCompilar.setMinimumSize(new java.awt.Dimension(60, 50));
         btnCompilar.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/compilar-select.png"))); // NOI18N
         btnCompilar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCompilar.addActionListener(new java.awt.event.ActionListener() {
@@ -1026,8 +1024,6 @@ public class Interfaz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al llenar las tablas");
         }
         v.setVisible(true);
-
-        ventanaid.setVisible(true);
     }//GEN-LAST:event_btnAnalisisLexicoActionPerformed
 
     private void btnAnalisisSintacticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnalisisSintacticoActionPerformed
