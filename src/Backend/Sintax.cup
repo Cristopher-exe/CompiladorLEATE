@@ -61,7 +61,7 @@ parser code
         }else {
             if (info instanceof Symbol){
                 Symbol s = (Symbol)info;
-                String m = "*Error Sintactico "+n_error+".";               
+                String m = "*Error "+n_error+".";               
                 Interfaz.banderax = true; //Como hay un error 
                 ErrorUI(m, s.value.toString(), (s.right+1), message);
             }else{
@@ -185,7 +185,7 @@ DECLARACION ::=
                 Final error Identificador P_coma {:report_error("002","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|         
                 Final T_dato error P_coma {:report_error("003","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
                 Final T_dato Identificador error {:report_error("004","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
-                Final T_dato Identificador Op_asig error P_coma {:report_error("005","Dato incorrecto, se espera un numero valido",tokenError); RESULT = new Symbol(-1);:}|
+                Final T_dato Identificador Op_asig error P_coma {:report_error("005","Error sintactico: Tipode dato no valido",tokenError); RESULT = new Symbol(-1);:}|
                 Final T_dato Identificador Op_asig Numero error {:report_error("006","Operador de cierre incorrecto, se espera: (;)",tokenError); RESULT = new Symbol(-1);:}|
                 error Identificador P_coma {:report_error("007","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
                 T_dato error P_coma {:report_error("008","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
