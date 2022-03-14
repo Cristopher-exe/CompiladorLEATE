@@ -55,10 +55,10 @@ public class Interfaz extends javax.swing.JFrame {
     public static ArrayList<String> nm = new ArrayList<String>();
 
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
-    String rutaLexer = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Lexer.flex";
+    String rutaLexer = "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Lexer.flex";
 
-    String ruta2 = "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\LexerCup.flex";
-    String[] rutas = {"-parser", "Sintax", "D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Sintax.cup"};
+    String ruta2 = "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\LexerCup.flex";
+    String[] rutas = {"-parser", "Sintax", "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.cup"};
 
     public Interfaz() throws Exception {
         initComponents();
@@ -75,8 +75,8 @@ public class Interfaz extends javax.swing.JFrame {
         colors();
         cerrar();
         //Crear el LEXER (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
-        //generarLexer(rutaLexer);
-        //Generar(rutaLexer, ruta2, rutas);
+        generarLexer(rutaLexer);
+        Generar(rutaLexer, ruta2, rutas);
     }
 
     public static void generarLexer(String ruta) {
@@ -93,23 +93,23 @@ public class Interfaz extends javax.swing.JFrame {
         JFlex.Main.generate(archivo);
         java_cup.Main.main(rutaS);
 
-        Path rutaSym = Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\sym.java");
+        Path rutaSym = Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\sym.java");
         if (Files.exists(rutaSym)) {
             Files.delete(rutaSym);
         }
 
         Files.move(
-                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\sym.java"),
-                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\sym.java")
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\sym.java"),
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\sym.java")
         );
 
-        Path rutaSin = Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Sintax.java");
+        Path rutaSin = Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.java");
         if (Files.exists(rutaSin)) {
             Files.delete(rutaSin);
         }
         Files.move(
-                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\Sintax.java"),
-                Paths.get("D:\\Cristopher\\Documentos\\NetBeansProjects\\Compilador_LEATE\\src\\Backend\\Sintax.java")
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\Sintax.java"),
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.java")
         );
     }
 

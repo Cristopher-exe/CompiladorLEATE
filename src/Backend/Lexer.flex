@@ -37,6 +37,9 @@ star {lexeme=yytext(); line=yyline; return star;}
 Else {lexeme=yytext(); line=yyline; return Else;}
 int {lexeme=yytext(); line=yyline; return T_dato;}
 long {lexeme=yytext(); line=yyline; return T_dato;}
+bool {lexeme=yytext(); line=yyline; return T_dato;}
+verdadero {lexeme=yytext(); line=yyline; return Valor_ver;}
+falso {lexeme=yytext(); line=yyline; return Valor_fal;}
 pulsa {lexeme=yytext(); line=yyline; return pulsa;}
 output_N {lexeme=yytext(); line=yyline; return output_N;}
 KP_Z {lexeme=yytext(); line=yyline; return Kp_Teclado;}

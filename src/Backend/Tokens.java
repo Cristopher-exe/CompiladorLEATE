@@ -46,6 +46,8 @@ public enum Tokens {
     star,
     Else,
     T_dato,
+    Valor_fal,
+    Valor_ver,
     pulsa,
     output_N,
     Kp_Teclado,

@@ -117,9 +117,9 @@ parser code
 :}
 
 terminal retnot,For,While,If,delay_ms,star,Else,pulsa,output_N,KeyPlayed,Display,Final,event,caso,output_high,output_low,
-        pines_B,T_dato,Op_asig,Op_Suma,Op_Resta,Op_Multiplicacion,Op_Division,Op_relacional,Op_in_de_cremento,parentesis_a,parentesis_c,
-        Llave_a,Llave_c,Corchete_a,Corchete_c,P_coma,dosPuntos,Identificador,Numero,ERRORL_000,Kp_Teclado,Sig_Agru,TK_punto,
-        Op_decremento
+        pines_B,T_dato,Valor_ver,Valor_fal,Op_asig,Op_Suma,Op_Resta,Op_Multiplicacion,Op_Division,Op_relacional,Op_in_de_cremento,
+        parentesis_a,parentesis_c,Llave_a,Llave_c,Corchete_a,Corchete_c,P_coma,dosPuntos,Identificador,Numero,ERRORL_000,Kp_Teclado,
+        Sig_Agru,TK_punto,Op_decremento
 ;
 
 non terminal INICIO,DECLARACION,N_METODO,SENTENCIAS_R,N_WHILE,SENTENCIAS_W,N_OUTPUT,N_CONTROLAR,

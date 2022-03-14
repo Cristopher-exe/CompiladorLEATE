@@ -73,7 +73,13 @@ COMENTUNILINEA = "#".*
 (PIN_B0 | PIN_B1 | PIN_B2 | PIN_B3 | PIN_B4 | PIN_B5 | PIN_B6) {return new Symbol(sym.pines_B, yychar, yyline, yytext());}
 
 /* Tipos de datos */
-( int | long ) {return new Symbol(sym.T_dato, yychar, yyline, yytext());}
+( int | long | bool ) {return new Symbol(sym.T_dato, yychar, yyline, yytext());}
+
+/* Valores booleanos */
+
+( verdadero ) {return new Symbol(sym.Valor_ver, yychar, yyline, yytext());}
+
+( falso ) {return new Symbol(sym.Valor_fal, yychar, yyline, yytext());}
 
 /* Operador Igual */
 ( "=" ) {return new Symbol(sym.Op_asig, yychar, yyline, yytext());}
