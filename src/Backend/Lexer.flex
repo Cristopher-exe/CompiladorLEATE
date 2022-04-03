@@ -136,7 +136,7 @@ PIN_B6 {lexeme=yytext(); line=yyline; return pines_B;}
 ({ACENTO}|{SIMBOLO}){DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return ERRORL_011;}
 
 ////Un numero no debe contener simbolos especiales
-{DIGITO}+({ACENTO}|{SIMBOLO}){DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return ERRORL_012;}
+{DIGITO}+({ACENTO}|{SIMBOLO}){DIGITO}+|({SIGNO}{DIGITO}+) {lexeme=yytext(); line=yyline; return ERRORL_012;}
 
 ////Un numero no debe comenzar con guion bajo
 "_"{DIGITO}+|({SIGNO}"_"{DIGITO}+) |("_"{DIGITO}+"."{DIGITO}+) | (("_"{DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {lexeme=yytext(); line=yyline; return ERRORL_013;}

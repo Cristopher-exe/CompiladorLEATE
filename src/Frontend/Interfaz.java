@@ -55,10 +55,10 @@ public class Interfaz extends javax.swing.JFrame {
     public static ArrayList<String> nm = new ArrayList<String>();
 
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
-    String rutaLexer = "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Lexer.flex";
+    String rutaLexer = "D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Lexer.flex";
 
-    String ruta2 = "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\LexerCup.flex";
-    String[] rutas = {"-parser", "Sintax", "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.cup"};
+    String ruta2 = "D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\LexerCup.flex";
+    String[] rutas = {"-parser", "Sintax", "D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Sintax.cup"};
 
     public Interfaz() throws Exception {
         initComponents();
@@ -74,7 +74,7 @@ public class Interfaz extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         colors();
         cerrar();
-        //Crear el LEXER (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
+        //Crear el LEXER (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario :)
         //generarLexer(rutaLexer);
         //Generar(rutaLexer, ruta2, rutas);
     }
@@ -92,24 +92,26 @@ public class Interfaz extends javax.swing.JFrame {
         archivo = new File(ruta2);
         JFlex.Main.generate(archivo);
         java_cup.Main.main(rutaS);
-
-        Path rutaSym = Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\sym.java");
+        
+        //D:\Cristopher\Documentos\Cristopher\Datos - Universidad\Semestre 10 Ene - Jun\03 - LENG. Y AUTOM II\CompiladorLEATE
+        //C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2
+        Path rutaSym = Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\sym.java");
         if (Files.exists(rutaSym)) {
             Files.delete(rutaSym);
         }
 
         Files.move(
-                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\sym.java"),
-                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\sym.java")
+                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\sym.java"),
+                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\sym.java")
         );
 
-        Path rutaSin = Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.java");
+        Path rutaSin = Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Sintax.java");
         if (Files.exists(rutaSin)) {
             Files.delete(rutaSin);
         }
         Files.move(
-                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\Sintax.java"),
-                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.java")
+                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\Sintax.java"),
+                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Sintax.java")
         );
     }
 
@@ -759,7 +761,6 @@ public class Interfaz extends javax.swing.JFrame {
         jButton1.setContentAreaFilled(false);
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMaximumSize(new java.awt.Dimension(563, 50));
         jButton1.setMinimumSize(new java.awt.Dimension(480, 50));
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton1);
@@ -1069,6 +1070,8 @@ public class Interfaz extends javax.swing.JFrame {
                 PanelSalida.setText(msj_lexicos + s.msj_ErrorGeneral.toString());
             } else {
                 PanelSalida.setText("Analisis Correcto");
+                v.setVisible(true);
+                ventanaid.setVisible(true);
             }
             
         } catch (IOException ex) {
@@ -1077,8 +1080,7 @@ public class Interfaz extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error de programa");
         }
         
-        v.setVisible(true);
-        ventanaid.setVisible(true);
+        
     }//GEN-LAST:event_btnCompilarActionPerformed
 
     private void btnLimpiarPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarPSActionPerformed
