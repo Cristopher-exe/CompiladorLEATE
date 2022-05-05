@@ -6,6 +6,8 @@
 package Frontend;
 
 //import static Frontend.V_Identificadores.identi;
+import Backend.atributosIdentificador;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class V_Identificadores extends javax.swing.JDialog {
     public static DefaultTableModel identi;
+    public static HashMap<String,atributosIdentificador> identificadores = new HashMap<String,atributosIdentificador>();
     /**
      * Creates new form V_Identificadores
      */

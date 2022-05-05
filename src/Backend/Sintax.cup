@@ -3,6 +3,7 @@ package Backend;
 import java_cup.runtime.Symbol;
 import Frontend.Interfaz;
 import Frontend.V_Identificadores;
+import java.util.HashMap;
 
 parser code
 {:
@@ -15,11 +16,13 @@ parser code
     public Symbol tokenError; //Variable donde se guarda el error detectado
     public int numeroMetodo = 0;
     
+    
     public boolean banderaErrorGeneral = false; //Si existe un error general esta variable = true
     public boolean banderaErroresProducidos = false; //Si existe un error producido esta variable = true
     
     public String msj_ErroresProducidos = ""; //Variable global donde se guarda todos los errores generales
     public String msj_ErrorGeneral = ""; //Variable global donde se guarda el error general
+
 
     
     
@@ -87,28 +90,34 @@ parser code
     public void insertarIdentificadores(String id, String tdato, int val, int pos, String amb){
         Object []I = new Object[5];
         boolean esNuevo = true;
+        String tipoDeDato = "";
         int existeAqui = 0;
-        I[0]=id; 
-        I[1]=tdato; 
-        I[2]=val; 
-        I[3]=pos; 
-        I[4]=amb;
         if(V_Identificadores.identi.getRowCount()>0){
             for(int i = 0; i<V_Identificadores.identi.getRowCount(); i++){
                 if(id.equals((String)V_Identificadores.identi.getValueAt(i,0))){
                     if(amb.equals((String)V_Identificadores.identi.getValueAt(i,4))){
                         esNuevo = false;
                         existeAqui = i;
+                        tipoDeDato = (String)V_Identificadores.identi.getValueAt(i,1);
                     }
                 }
             }
         }
+            I[0]=id; 
+            I[1]=tdato; 
+            I[2]=val; 
+            I[3]=pos; 
+            I[4]=amb;
         
         if(esNuevo){
+            atributosIdentificador atr = new atributosIdentificador(tdato,val,pos,amb);
+            V_Identificadores.identificadores.put(id,atr);
             V_Identificadores.identi.addRow(I);
         } else {
             V_Identificadores.identi.setValueAt(I[3], existeAqui, 3);
             V_Identificadores.identi.setValueAt(I[2], existeAqui, 2);
+            atributosIdentificador atr = new atributosIdentificador(tipoDeDato,val,pos,amb);
+            V_Identificadores.identificadores.put(id,atr);
         }
     }    
 
@@ -118,6 +127,7 @@ parser code
         boolean esNuevo = true;
         int existeAqui = 0;
         Object valor = "";
+        String tipoDeDato = "";
 
         if(V_Identificadores.identi.getRowCount()>0){
             for(int i = 0; i<V_Identificadores.identi.getRowCount(); i++){
@@ -125,6 +135,7 @@ parser code
                     if(amb.equals((String)V_Identificadores.identi.getValueAt(i,4))){
                         esNuevo = false;
                         existeAqui = i;
+                        tipoDeDato = (String)V_Identificadores.identi.getValueAt(i,1);
                     }
                 }
                 if(val.equals((String)V_Identificadores.identi.getValueAt(i,0))){
@@ -141,12 +152,15 @@ parser code
         I[3]=pos; 
         I[4]=amb;
         
-        
         if(esNuevo){
             V_Identificadores.identi.addRow(I);
+            atributosIdentificador atr = new atributosIdentificador(tdato,Integer.parseInt(valor.toString()),pos,amb);
+            V_Identificadores.identificadores.put(id,atr);
         } else {
             V_Identificadores.identi.setValueAt(I[3], existeAqui, 3);
             V_Identificadores.identi.setValueAt(I[2], existeAqui, 2);
+            atributosIdentificador atr = new atributosIdentificador(tipoDeDato,Integer.parseInt(valor.toString()),pos,amb);
+            V_Identificadores.identificadores.put(id,atr);
         }
     }
        
@@ -175,12 +189,14 @@ INICIO ::=
 ;
 
 DECLARACION ::= 
-                Final T_dato:tdato Identificador:id  P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), 0, idright+1, "Global");:}|
-                Final T_dato:tdato Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, "Global");:}|
-                Final T_dato:tdato Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), val.toString(), idright+1, "Global");:}|
+                Final:fin_al T_dato:tdato Identificador:id  P_coma {:insertarIdentificadores(id.toString(), fin_al.toString()+" "+tdato.toString(), 0, idright+1, "Global");:}|
+                Final:fin_al T_dato:tdato Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), fin_al.toString()+" "+tdato.toString(), Integer.parseInt((String)val), idright+1, "Global");:}|
+                Final:fin_al T_dato:tdato Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), fin_al.toString()+" "+tdato.toString(), val.toString(), idright+1, "Global");:}|
                 T_dato:tdato Identificador:id P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), 0, idright+1, "Global");:}|
                 T_dato:tdato Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, "Global");:}|
                 T_dato:tdato Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), val.toString(), idright+1, "Global");:}|
+                Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), "", Integer.parseInt((String)val), idright+1, "Global");:}|
+                Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), "", Integer.parseInt((String)val), idright+1, "Global");:}|
                 error T_dato Identificador P_coma {:report_error("001","Modificador de acceso incorrecto se espera: (Final)",tokenError); RESULT = new Symbol(-1);:}|
                 Final error Identificador P_coma {:report_error("002","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|         
                 Final T_dato error P_coma {:report_error("003","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
@@ -232,6 +248,8 @@ DECLARACION_N_METODO ::=
                 T_dato:tdato Identificador:id P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), 0, idright+1, numeroMetodo+"");:}|
                 T_dato:tdato Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, numeroMetodo+"");:}|
                 T_dato:tdato Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), val.toString(), idright+1, numeroMetodo+"");:}|
+                Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), "", Integer.parseInt((String)val), idright+1, numeroMetodo+"");:}|
+                Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), "", Integer.parseInt((String)val), idright+1, numeroMetodo+"");:}|
                 error T_dato Identificador P_coma {:report_error("023","Modificador de acceso incorrecto se espera: (Final)",tokenError); RESULT = new Symbol(-1);:}|
                 Final error Identificador P_coma {:report_error("024","Tipo de dato incorrecto se espera: (int | long)",tokenError); RESULT = new Symbol(-1);:}|
                 Final T_dato error P_coma {:report_error("025","Dato incorrecto, se espera un identificador valido",tokenError); RESULT = new Symbol(-1);:}|
