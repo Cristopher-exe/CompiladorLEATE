@@ -52,6 +52,7 @@ public class Interfaz extends javax.swing.JFrame {
     Acercade ac = new Acercade(this, rootPaneCheckingEnabled);
     public static String errores_Producidos = "";
     public static boolean banderax = false;
+    public static boolean banderaeSem = false;
     public static ArrayList<String> nm = new ArrayList<String>();
 
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
@@ -592,6 +593,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         Fondo = new javax.swing.JPanel();
         jToolBar1 = new javax.swing.JToolBar();
         btnNuevo = new javax.swing.JButton();
@@ -600,15 +602,14 @@ public class Interfaz extends javax.swing.JFrame {
         btnGuardarComo = new javax.swing.JButton();
         btnAnalisisLexico = new javax.swing.JButton();
         btnAnalisisSintactico = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JToolBar.Separator();
         btnCompilar = new javax.swing.JButton();
+        jSeparator3 = new javax.swing.JToolBar.Separator();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         PanelSalida = new javax.swing.JTextArea();
         jScrollPanelFuente = new javax.swing.JScrollPane();
         PanelFuente = new javax.swing.JTextPane();
-        jToolBar2 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnmenuNuevo = new javax.swing.JMenuItem();
@@ -621,6 +622,8 @@ public class Interfaz extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         btnMenuVariables = new javax.swing.JMenuItem();
         bntMenuIdentificadores = new javax.swing.JMenuItem();
@@ -630,6 +633,8 @@ public class Interfaz extends javax.swing.JFrame {
         jMenuItem4.setText("jMenuItem4");
 
         jMenuItem6.setText("jMenuItem6");
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(2000, 2000));
@@ -642,6 +647,7 @@ public class Interfaz extends javax.swing.JFrame {
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jToolBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
         jToolBar1.setPreferredSize(new java.awt.Dimension(100, 40));
 
@@ -742,6 +748,14 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jToolBar1.add(btnAnalisisSintactico);
 
+        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator2.setMaximumSize(new java.awt.Dimension(2, 30));
+        jSeparator2.setMinimumSize(new java.awt.Dimension(2, 30));
+        jSeparator2.setSeparatorSize(new java.awt.Dimension(2, 30));
+        jToolBar1.add(jSeparator2);
+
         btnCompilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/compilar.png"))); // NOI18N
         btnCompilar.setToolTipText("Compilar");
         btnCompilar.setBorder(null);
@@ -758,6 +772,25 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jToolBar1.add(btnCompilar);
 
+        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
+        jSeparator3.setSeparatorSize(new java.awt.Dimension(2, 30));
+        jToolBar1.add(jSeparator3);
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoIntermedio.png"))); // NOI18N
+        jButton1.setToolTipText("Codigo Intermedio");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setName(""); // NOI18N
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoIntermedio-select.png"))); // NOI18N
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(jButton1);
+
         Fondo.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
         PanelSalida.setColumns(20);
@@ -772,56 +805,6 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPanelFuente.setViewportView(PanelFuente);
 
         Fondo.add(jScrollPanelFuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1000, 410));
-
-        jToolBar2.setBackground(new java.awt.Color(255, 255, 255));
-        jToolBar2.setRollover(true);
-
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoIntermedio.png"))); // NOI18N
-        jButton1.setToolTipText("Codigo Intermedio");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMaximumSize(new java.awt.Dimension(60, 50));
-        jButton1.setMinimumSize(new java.awt.Dimension(60, 50));
-        jButton1.setName(""); // NOI18N
-        jButton1.setPreferredSize(new java.awt.Dimension(60, 50));
-        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoIntermedio-select.png"))); // NOI18N
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton1);
-        jButton1.getAccessibleContext().setAccessibleName("");
-
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/OptimizacionCod.png"))); // NOI18N
-        jButton2.setToolTipText("Optimización de codigo");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMaximumSize(new java.awt.Dimension(60, 50));
-        jButton2.setMinimumSize(new java.awt.Dimension(60, 50));
-        jButton2.setPreferredSize(new java.awt.Dimension(60, 50));
-        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/OptimizacionCod-select.png"))); // NOI18N
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton2);
-
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoOb.png"))); // NOI18N
-        jButton3.setToolTipText("Codigo Objeto");
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setMaximumSize(new java.awt.Dimension(60, 50));
-        jButton3.setMinimumSize(new java.awt.Dimension(60, 50));
-        jButton3.setPreferredSize(new java.awt.Dimension(60, 50));
-        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoOb-select.png"))); // NOI18N
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton3);
-
-        Fondo.add(jToolBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 400, 50));
 
         getContentPane().add(Fondo, java.awt.BorderLayout.CENTER);
 
@@ -885,6 +868,10 @@ public class Interfaz extends javax.swing.JFrame {
 
         jMenuItem9.setText("Analisis Sintactico");
         jMenu2.add(jMenuItem9);
+        jMenu2.add(jSeparator4);
+
+        jMenuItem2.setText("Codigo Intermedio");
+        jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
@@ -1092,6 +1079,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
         PanelSalida.setText("");
+        Sintax.msjEsemanticos = "";
         String ST = PanelFuente.getText();
         Sintax s = new Sintax(new Backend.LexerCup(new StringReader(ST)));
         String msj_lexicos = "";
@@ -1106,13 +1094,13 @@ public class Interfaz extends javax.swing.JFrame {
             cambiarAmbitos();
             if (banderax == true) {
                 msj_lexicos = PanelSalida.getText();
-                PanelSalida.setText(msj_lexicos + s.msj_ErroresProducidos);
+                PanelSalida.setText(msj_lexicos + s.msj_ErroresProducidos+Sintax.msjEsemanticos);
                 //System.out.print(s.errores_sin);
             } else if (s.banderaErrorGeneral == true) {
                 msj_lexicos = PanelSalida.getText();
-                PanelSalida.setText(msj_lexicos + s.msj_ErrorGeneral.toString());
-            } else {
-                PanelSalida.setText("Analisis Correcto");
+                PanelSalida.setText(msj_lexicos + s.msj_ErrorGeneral.toString()+Sintax.msjEsemanticos);
+            } else{               
+                PanelSalida.setText("Analisis Correcto\n"+"***********************\n"+Sintax.msjEsemanticos);
                 v.setVisible(true);
                 ventanaid.setVisible(true);
             }
@@ -1120,7 +1108,7 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al llenar las tablas");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error de programa");
+            JOptionPane.showMessageDialog(null, "Error de programa: "+ex);
         }
         
         
@@ -1251,13 +1239,13 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnmenuGuardarComo;
     private javax.swing.JMenuItem btnmenuNuevo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
@@ -1265,7 +1253,9 @@ public class Interfaz extends javax.swing.JFrame {
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JScrollPane jScrollPanelFuente;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator2;
+    private javax.swing.JToolBar.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 }

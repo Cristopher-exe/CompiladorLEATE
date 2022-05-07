@@ -138,6 +138,7 @@ COMENTUNILINEA = "#".*
 //Num
 {DIGITO}+|({SIGNO}{DIGITO}+) |({DIGITO}+"."{DIGITO}+) | (({DIGITO}+"."{DIGITO}+)([eE][-+]?{DIGITO}+)) {return new Symbol(sym.Numero, yychar, yyline, yytext());}
 
+
 /* Error de analisis */
  . {return new Symbol(sym.ERRORL_000, yychar, yyline, yytext());}
 

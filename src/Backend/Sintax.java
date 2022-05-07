@@ -25,7 +25,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
 
   /** Default constructor. */
   public Sintax() {super();}
-
+  
   /** Constructor which sets the default scanner. */
   public Sintax(java_cup.runtime.Scanner s) {super(s);}
 
@@ -1073,7 +1073,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
     protected int error_sync_size(){
         return 1;
     }
-    
+    public static String msjEsemanticos = "";
     public Symbol tokenError; //Variable donde se guarda el error detectado
     public int numeroMetodo = 0;
     
@@ -1120,6 +1120,8 @@ public class Sintax extends java_cup.runtime.lr_parser {
     }
 
     public void report_error(String n_error,String message, Object info){
+        String eSintactico = "*Error Sintactico ";
+        String eSemantico = "*Error Semantico ";
         if (info instanceof String){
             System.out.println(message);
         }else {
@@ -1179,6 +1181,8 @@ public class Sintax extends java_cup.runtime.lr_parser {
             V_Identificadores.identi.setValueAt(I[2], existeAqui, 2);
             atributosIdentificador atr = new atributosIdentificador(tipoDeDato,val,pos,amb);
             V_Identificadores.identificadores.put(id,atr);
+            msjEsemanticos += ("*Error Semantico 87. En la Linea: "+pos+" ["+id+"]. El identificador ya esta declarado\n");
+            
         }
     }    
 
