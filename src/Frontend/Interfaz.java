@@ -603,11 +603,14 @@ public class Interfaz extends javax.swing.JFrame {
         btnAnalisisLexico = new javax.swing.JButton();
         btnAnalisisSintactico = new javax.swing.JButton();
         btnCompilar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         PanelSalida = new javax.swing.JTextArea();
         jScrollPanelFuente = new javax.swing.JScrollPane();
         PanelFuente = new javax.swing.JTextPane();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         btnmenuNuevo = new javax.swing.JMenuItem();
@@ -757,17 +760,7 @@ public class Interfaz extends javax.swing.JFrame {
         });
         jToolBar1.add(btnCompilar);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/fondo  de aceesos rapidos.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMinimumSize(new java.awt.Dimension(480, 50));
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton1);
-
-        Fondo.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1300, 50));
+        Fondo.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
 
         PanelSalida.setColumns(20);
         PanelSalida.setRows(5);
@@ -781,6 +774,56 @@ public class Interfaz extends javax.swing.JFrame {
         jScrollPanelFuente.setViewportView(PanelFuente);
 
         Fondo.add(jScrollPanelFuente, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 1000, 410));
+
+        jToolBar2.setBackground(new java.awt.Color(255, 255, 255));
+        jToolBar2.setRollover(true);
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoIntermedio.png"))); // NOI18N
+        jButton1.setToolTipText("Codigo Intermedio");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setFocusable(false);
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setMaximumSize(new java.awt.Dimension(60, 50));
+        jButton1.setMinimumSize(new java.awt.Dimension(60, 50));
+        jButton1.setName(""); // NOI18N
+        jButton1.setPreferredSize(new java.awt.Dimension(60, 50));
+        jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoIntermedio-select.png"))); // NOI18N
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton1);
+        jButton1.getAccessibleContext().setAccessibleName("");
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/OptimizacionCod.png"))); // NOI18N
+        jButton2.setToolTipText("Optimización de codigo");
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setMaximumSize(new java.awt.Dimension(60, 50));
+        jButton2.setMinimumSize(new java.awt.Dimension(60, 50));
+        jButton2.setPreferredSize(new java.awt.Dimension(60, 50));
+        jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/OptimizacionCod-select.png"))); // NOI18N
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton2);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoOb.png"))); // NOI18N
+        jButton3.setToolTipText("Codigo Objeto");
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setMaximumSize(new java.awt.Dimension(60, 50));
+        jButton3.setMinimumSize(new java.awt.Dimension(60, 50));
+        jButton3.setPreferredSize(new java.awt.Dimension(60, 50));
+        jButton3.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoOb-select.png"))); // NOI18N
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton3);
+
+        Fondo.add(jToolBar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 0, 400, 50));
 
         getContentPane().add(Fondo, java.awt.BorderLayout.CENTER);
 
@@ -1290,6 +1333,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnmenuGuardarComo;
     private javax.swing.JMenuItem btnmenuNuevo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -1303,5 +1348,6 @@ public class Interfaz extends javax.swing.JFrame {
     public static javax.swing.JScrollPane jScrollPanelFuente;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 }
