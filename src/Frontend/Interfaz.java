@@ -1100,7 +1100,7 @@ public class Interfaz extends javax.swing.JFrame {
                 msj_lexicos = PanelSalida.getText();
                 PanelSalida.setText(msj_lexicos + s.msj_ErrorGeneral.toString()+Sintax.msjEsemanticos);
             } else{               
-                PanelSalida.setText("Analisis Correcto\n"+"***********************\n"+Sintax.msjEsemanticos);
+                PanelSalida.setText("Analisis Correcto\n"+"************************\n"+Sintax.msjEsemanticos);
                 v.setVisible(true);
                 ventanaid.setVisible(true);
             }

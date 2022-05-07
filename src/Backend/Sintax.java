@@ -1181,7 +1181,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
             V_Identificadores.identi.setValueAt(I[2], existeAqui, 2);
             atributosIdentificador atr = new atributosIdentificador(tipoDeDato,val,pos,amb);
             V_Identificadores.identificadores.put(id,atr);
-            msjEsemanticos += ("*Error Semantico 87. En la Linea: "+pos+" ["+id+"]. El identificador ya esta declarado\n");
+            msjEsemanticos += ("*Error Semantico 87. En la Linea: "+pos+" ["+id+"]. El identificador ya esta declarado \n");
             
         }
     }    
