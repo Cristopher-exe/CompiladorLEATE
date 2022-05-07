@@ -12,12 +12,8 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/chico/Documents/NetBeansProjects/CompiladorLEATE2/src/Backend/LexerCup.java</file>
-            <file>file:/C:/Users/chico/Documents/NetBeansProjects/CompiladorLEATE2/src/Backend/lexer.java</file>
-            <file>file:/C:/Users/chico/Documents/NetBeansProjects/CompiladorLEATE2/src/Backend/sym.java</file>
             <file>file:/C:/Users/chico/Documents/NetBeansProjects/CompiladorLEATE2/src/Frontend/Interfaz.java</file>
-            <file>file:/C:/Users/chico/Documents/NetBeansProjects/CompiladorLEATE2/src/Backend/Sintax.cup</file>
-            <file>file:/C:/Users/chico/Documents/NetBeansProjects/CompiladorLEATE2/src/Backend/Sintax.java</file>
+            <file>file:/C:/Users/chico/Documents/NetBeansProjects/CompiladorLEATE2/src/Backend/Arbol.java</file>
         </group>
     </open-files>
 </project-private>
