@@ -54,12 +54,14 @@ public class Interfaz extends javax.swing.JFrame {
     public static boolean banderax = false;
     public static boolean banderaeSem = false;
     public static ArrayList<String> nm = new ArrayList<String>();
+    int temp = 0;
+    String ci = "";
 
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
-    String rutaLexer = "D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Lexer.flex";
+    String rutaLexer = "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Lexer.flex";
 
-    String ruta2 = "D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\LexerCup.flex";
-    String[] rutas = {"-parser", "Sintax", "D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Sintax.cup"};
+    String ruta2 = "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\LexerCup.flex";
+    String[] rutas = {"-parser", "Sintax", "C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.cup"};
 
     public Interfaz() throws Exception {
         initComponents();
@@ -96,23 +98,23 @@ public class Interfaz extends javax.swing.JFrame {
         
         //D:\Cristopher\Documentos\Cristopher\Datos - Universidad\Semestre 10 Ene - Jun\03 - LENG. Y AUTOM II\CompiladorLEATE
         //C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2
-        Path rutaSym = Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\sym.java");
+        Path rutaSym = Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\sym.java");
         if (Files.exists(rutaSym)) {
             Files.delete(rutaSym);
         }
 
         Files.move(
-                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\sym.java"),
-                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\sym.java")
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\sym.java"),
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\sym.java")
         );
 
-        Path rutaSin = Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Sintax.java");
+        Path rutaSin = Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.java");
         if (Files.exists(rutaSin)) {
             Files.delete(rutaSin);
         }
         Files.move(
-                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\Sintax.java"),
-                Paths.get("D:\\Cristopher\\Documentos\\Cristopher\\Datos - Universidad\\Semestre 10 Ene - Jun\\03 - LENG. Y AUTOM II\\CompiladorLEATE\\src\\Backend\\Sintax.java")
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\Sintax.java"),
+                Paths.get("C:\\Users\\chico\\Documents\\NetBeansProjects\\CompiladorLEATE2\\src\\Backend\\Sintax.java")
         );
     }
 
@@ -1082,6 +1084,8 @@ public class Interfaz extends javax.swing.JFrame {
         Sintax.msjEsemanticos = "";
         String ST = PanelFuente.getText();
         Sintax s = new Sintax(new Backend.LexerCup(new StringReader(ST)));
+        Arbol a = new Arbol();
+        ci = "";
         String msj_lexicos = "";
         ventanaid.identi.setRowCount(0);
         nm.clear();
@@ -1110,7 +1114,49 @@ public class Interfaz extends javax.swing.JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error de programa: "+ex);
         }
-        
+        if(banderax == false && s.banderaErrorGeneral == false){
+            String[] arbolAr = ST.split("\n");
+            for(int i =0; i<arbolAr.length; i++){
+                if(!arbolAr[i].isEmpty() && !arbolAr[i].equals(" ")){
+                    if(arbolAr[i].contains("#")){
+                        arbolAr[i] = arbolAr[i].substring(0, arbolAr[i].indexOf("#"));
+                    }
+                    if(arbolAr[i].contains("\t")){
+                        arbolAr[i] = arbolAr[i].replace("\t", "");
+                    }
+                    String[] cadenas = arbolAr[i].split(" ");
+                    String linea = "";
+                    if(cadenas[0].equals("int") || cadenas[0].equals("long")){
+                        for(int j = 1; j<cadenas.length;j++ ){
+                            if(j < cadenas.length-1){
+                                linea += cadenas[j]+" ";
+                            } else {
+                                linea += cadenas[j];
+                            }
+                        }
+                    } else if (cadenas[0].equals("Final")){
+                        for(int j = 2; j<cadenas.length;j++ ){
+                            if(j < cadenas.length-1){
+                                linea += cadenas[j]+" ";
+                            } else {
+                                linea += cadenas[j];
+                            }
+                        }
+                    } else {
+                        linea = arbolAr[i];
+                    }
+                    if(linea.contains(";")){
+                        linea = linea.substring(0,linea.indexOf(";")); 
+                    }
+                    if(linea.length()>0){
+                    Nodo ar = a.crear(linea);
+                    intermedio(ar);
+                    ci += ar.getCodigo();    
+                    }
+                }
+            }
+            System.out.println(ci);    
+        }
         
     }//GEN-LAST:event_btnCompilarActionPerformed
 
@@ -1213,6 +1259,42 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         });
+    }
+    
+    //Generar el código intermedio
+    public void intermedio(Nodo n){
+        Nodo nodito = n;
+        if(n!=null){
+            intermedio(nodito.getIzquierdo());
+            intermedio(nodito.getDerecho());
+            if(n.getIzquierdo()==null && n.getDerecho()==null){
+                n.setLugar(n.getDato()+"");
+                n.setCodigo("");
+            } else {
+                if(n.getDato().equals("+") || (n.getDato().equals("*")) || n.getDato().equals("-") || n.getDato().equals("/") ){
+                    temp++;
+                    n.setLugar("T"+temp);
+                    String codigoI="";
+                    Nodo izquierdo=n.getIzquierdo();
+                    Nodo derecho=n.getDerecho();
+
+                    codigoI=izquierdo.getCodigo()+" "+derecho.getCodigo()+" "+
+                            n.getLugar()+" = "+izquierdo.getLugar()+" "+n.getDato()+
+                            " "+derecho.getLugar();
+                    n.setCodigo(codigoI+"\n");
+                    ci += codigoI+"\n";
+                } else {
+                    if(n.getDato().equals("=")){
+                        String codigoI="";
+                        Nodo izquierdo=n.getIzquierdo();
+                        Nodo derecho = n.getDerecho();
+                        codigoI = derecho.getCodigo()+" "+izquierdo.getLugar()+
+                                " = "+derecho.getLugar();
+                        n.setCodigo(codigoI+"\n");
+                    }
+                }
+            }
+        }
     }
 
     //variable que contendra la ruta del archivo
