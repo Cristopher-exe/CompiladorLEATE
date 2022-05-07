@@ -12,7 +12,7 @@ parser code
     protected int error_sync_size(){
         return 1;
     }
-    
+    public static String msjEsemanticos = "";
     public Symbol tokenError; //Variable donde se guarda el error detectado
     public int numeroMetodo = 0;
     
@@ -59,6 +59,8 @@ parser code
     }
 
     public void report_error(String n_error,String message, Object info){
+        String eSintactico = "*Error Sintactico ";
+        String eSemantico = "*Error Semantico ";
         if (info instanceof String){
             System.out.println(message);
         }else {
@@ -118,6 +120,7 @@ parser code
             V_Identificadores.identi.setValueAt(I[2], existeAqui, 2);
             atributosIdentificador atr = new atributosIdentificador(tipoDeDato,val,pos,amb);
             V_Identificadores.identificadores.put(id,atr);
+            msjEsemanticos += ("*Error Semantico 87. En la Linea: "+pos+" ["+id+"]. El identificador ya esta declarado \n");
         }
     }    
 
@@ -194,6 +197,8 @@ DECLARACION ::=
                 Final:fin_al T_dato:tdato Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), fin_al.toString()+" "+tdato.toString(), val.toString(), idright+1, "Global");:}|
                 T_dato:tdato Identificador:id P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), 0, idright+1, "Global");:}|
                 T_dato:tdato Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, "Global");:}|
+                T_dato:tdato Identificador:id Op_asig Valor_ver:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, "Global");:}|
+                T_dato:tdato Identificador:id Op_asig Valor_fal:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), Integer.parseInt((String)val), idright+1, "Global");:}|
                 T_dato:tdato Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), tdato.toString(), val.toString(), idright+1, "Global");:}|
                 Identificador:id Op_asig Numero:val P_coma {:insertarIdentificadores(id.toString(), "", Integer.parseInt((String)val), idright+1, "Global");:}|
                 Identificador:id Op_asig Identificador:val P_coma {:insertarIdentificadores(id.toString(), "", Integer.parseInt((String)val), idright+1, "Global");:}|

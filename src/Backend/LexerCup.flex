@@ -75,6 +75,12 @@ COMENTUNILINEA = "#".*
 /* Tipos de datos */
 ( int | long | bool ) {return new Symbol(sym.T_dato, yychar, yyline, yytext());}
 
+( int ) {return new Symbol(sym.int, yychar, yyline, yytext());}
+
+( long ) {return new Symbol(sym.long, yychar, yyline, yytext());}
+
+( bool ) {return new Symbol(sym.bool, yychar, yyline, yytext());}
+
 /* Valores booleanos */
 
 ( verdadero ) {return new Symbol(sym.Valor_ver, yychar, yyline, yytext());}

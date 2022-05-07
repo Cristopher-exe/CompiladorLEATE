@@ -10,9 +10,10 @@ package Backend;
  */
 public class atributosIdentificador {
     String tdato, amb;
-    int valor, pos;
+    double valor; 
+    int pos;
     
-    public atributosIdentificador(String tdato, int valor, int pos, String amb){
+    public atributosIdentificador(String tdato, double valor, int pos, String amb){
         this.tdato = tdato;
         this.valor = valor;
         this.pos = pos;
@@ -35,7 +36,7 @@ public class atributosIdentificador {
         this.amb = amb;
     }
 
-    public int getValor() {
+    public double getValor() {
         return valor;
     }
 
