@@ -1203,7 +1203,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
                     V_Identificadores.identi.addRow(I);
                 }else if(mat2.matches()){
                     Interfaz.banderax = true; //Como hay un error 
-                    ErrorUI("*Error Semantico 003.",String.valueOf(tem3),pos,"No hay coincidencia de tipos");
+                    ErrorUI("*Error Semantico 003.",String.valueOf(val),pos,"No hay coincidencia de tipos");
                 }else{
                     V_Identificadores.identi.addRow(I);
                 }
@@ -1215,8 +1215,10 @@ public class Sintax extends java_cup.runtime.lr_parser {
             V_Identificadores.identi.setValueAt(I[2], existeAqui, 2);
             atributosIdentificador atr = new atributosIdentificador(tipoDeDato,val,pos,amb);
             V_Identificadores.identificadores.put(id,atr);
-            Interfaz.banderax = true; //Como hay un error 
-            ErrorUI("*Error Semantico 002.",id,pos,"El identificador ya esta declarado");
+            if(!tdato.equals("")){
+                Interfaz.banderax = true; //Como hay un error 
+                ErrorUI("*Error Semantico 002.",id,pos,"El identificador ya esta declarado");
+            }
             
         }
     }

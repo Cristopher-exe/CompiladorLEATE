@@ -1128,7 +1128,7 @@ public class Interfaz extends javax.swing.JFrame {
                         banderax = true;
                         Sintax.ErrorUI("*Error Semantico 004.", id, pos, "La Variable no esta declarada");
                         //ErrorUI("*Error Semantico 003.",String.valueOf(tem3),pos,"No hay coincidencia de tipos");
-                    }else{
+                    }else {
                         continue;
                     }
                 }
@@ -1141,6 +1141,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
         PanelSalida.setText("");
         Sintax.msjEsemanticos = "";
+        Sintax.msj_ErroresProducidos = "";
         String ST = PanelFuente.getText();
         Sintax s = new Sintax(new Backend.LexerCup(new StringReader(ST)));
         Arbol a = new Arbol();
@@ -1163,7 +1164,7 @@ public class Interfaz extends javax.swing.JFrame {
                 msj_lexicos = PanelSalida.getText();
                 PanelSalida.setText(msj_lexicos + s.msj_ErrorGeneral.toString());
             } else {
-                PanelSalida.setText("Analisis Correcto\n" + "************************\n"+ s.msj_ErroresProducidos);
+                PanelSalida.setText("Analisis Correcto\n" + "************************\n");
                 v.setVisible(true);
                 ventanaid.setVisible(true);
                 idNoDeclarados();
