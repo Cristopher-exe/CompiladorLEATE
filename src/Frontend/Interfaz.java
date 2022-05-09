@@ -1121,10 +1121,35 @@ public class Interfaz extends javax.swing.JFrame {
         ac.setVisible(true);
 
     }//GEN-LAST:event_btnMenuLEATEActionPerformed
-
+    
+    public void idNoDeclarados(){
+        String amb = "";
+        String id = "";
+        int pos = 0;
+        for (int i = 0; i < ventanaid.identi.getRowCount(); i++) {
+            if(ventanaid.identi.getValueAt(i,1).toString().equals("") && (ventanaid.identi.getValueAt(i,4).toString().equals("Global") || ventanaid.identi.getValueAt(i,4).toString().equals("Local"))){
+                id = ventanaid.identi.getValueAt(i,0).toString();
+                amb = ventanaid.identi.getValueAt(i,4).toString();
+                pos = (int)ventanaid.identi.getValueAt(i,3);
+                for (int j = 0; j < ventanaid.identi.getRowCount(); j++) {
+                    if(ventanaid.identi.getValueAt(j,0).toString().equals(id) && ventanaid.identi.getValueAt(j,4).toString().equals(amb)){
+                        banderax = true;
+                        Sintax.ErrorUI("*Error Semantico 004.", id, pos, "La Variable no esta declarada");
+                        //ErrorUI("*Error Semantico 003.",String.valueOf(tem3),pos,"No hay coincidencia de tipos");
+                    }else {
+                        continue;
+                    }
+                }
+            }else{
+                continue;
+            }
+        }
+    }
+    
     private void btnCompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompilarActionPerformed
         PanelSalida.setText("");
         Sintax.msjEsemanticos = "";
+        Sintax.msj_ErroresProducidos = "";
         String ST = PanelFuente.getText();
         Sintax s = new Sintax(new Backend.LexerCup(new StringReader(ST)));
         Arbol a = new Arbol();
@@ -1139,6 +1164,7 @@ public class Interfaz extends javax.swing.JFrame {
             tablaLexemas();
             s.parse();
             cambiarAmbitos();
+            idNoDeclarados();
             if (banderax == true) {
                 msj_lexicos = PanelSalida.getText();
                 PanelSalida.setText(msj_lexicos + s.msj_ErroresProducidos);
@@ -1146,9 +1172,10 @@ public class Interfaz extends javax.swing.JFrame {
                 msj_lexicos = PanelSalida.getText();
                 PanelSalida.setText(msj_lexicos + s.msj_ErrorGeneral.toString());
             } else {
-                PanelSalida.setText("Analisis Correcto\n" + "************************\n"+ s.msj_ErroresProducidos);
+                PanelSalida.setText("Analisis Correcto\n" + "************************\n");
                 v.setVisible(true);
                 ventanaid.setVisible(true);
+                idNoDeclarados();
             }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error al llenar las tablas");

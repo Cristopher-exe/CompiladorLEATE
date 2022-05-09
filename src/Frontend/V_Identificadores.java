@@ -135,6 +135,6 @@ public class V_Identificadores extends javax.swing.JDialog {
     public static javax.swing.JPanel jPanel1;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable tablaIdentificadores;
+    public static javax.swing.JTable tablaIdentificadores;
     // End of variables declaration//GEN-END:variables
 }
