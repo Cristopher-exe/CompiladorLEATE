@@ -19,6 +19,7 @@ public class Arbol {
     Stack<String> caracter;
     final String espacios="\t";
     final String aritmeticos = "=+-*/()";
+    final String relacionales = "><!";
     final String variables="abcdefghijklmnopqrstuvwxyz";
     private Nodo raiz;
     HashMap<String, String> tablaSimbolos;
@@ -66,28 +67,6 @@ private void guardar(){
     Nodo derecho = (Nodo) ArbolNodo.pop();
     String operador = caracter.peek();
     ArbolNodo.push(new Nodo(derecho, caracter.pop(), izquierdo));
-    // Esta sección quizá pueda evitarse si no almacenamos las reglas semanticas
-    /*if(operador.equals("=")){
-            String reglaE = "E.nodo = new Nodo('=',E1.nodo,T.nodo)";
-            reglasEjecutadas.add("p"+paso+" "+reglaE);
-    }
-    if(operador.equals("+")){
-        String reglaE = "E.nodo = new Nodo('+',E1.nodo,T.nodo)";
-        reglasEjecutadas.add("p"+paso+" "+reglaE);
-    }
-    if(operador.equals("*")){
-        String reglaE = "E.nodo = new Nodo('*',E1.nodo,T.nodo)";
-        reglasEjecutadas.add("p"+paso+" "+reglaE);
-    }
-    if(operador.equals("-")){
-        String reglaE = "E.nodo = new Nodo('-',E1.nodo,T.nodo)";
-        reglasEjecutadas.add("p"+paso+" "+reglaE);
-    }
-    if(operador.equals("/")){
-        String reglaE = "E.nodo = new Nodo('/',E1.nodo,T.nodo)";
-        reglasEjecutadas.add("p"+paso+" "+reglaE);
-    }*/
-    /*Alternativa imaginada mientras trasladaba*/
     switch(operador){
         case "+":
             reglaE = "E.nodo = new Nodo('+',E1.nodo,T.nodo)";
@@ -109,48 +88,81 @@ private void guardar(){
             reglaE = "E.nodo = new Nodo('=',E1.nodo,T.nodo)";
             reglasEjecutadas.add("p"+paso+" "+reglaE);
             break;
+        case "!=":
+            reglaE = "E.nodo = new Nodo('!=',E1.nodo,T.nodo)";
+            reglasEjecutadas.add("p"+paso+" "+reglaE);
+            break;
+        case "==":
+            reglaE = "E.nodo = new Nodo('==',E1.nodo,T.nodo)";
+            reglasEjecutadas.add("p"+paso+" "+reglaE);
+            break;
+        case "<":
+            reglaE = "E.nodo = new Nodo('<',E1.nodo,T.nodo)";
+            reglasEjecutadas.add("p"+paso+" "+reglaE);
+            break;
+        case ">":
+            reglaE = "E.nodo = new Nodo('>',E1.nodo,T.nodo)";
+            reglasEjecutadas.add("p"+paso+" "+reglaE);
+            break;
+        case "<=":
+            reglaE = "E.nodo = new Nodo('<=',E1.nodo,T.nodo)";
+            reglasEjecutadas.add("p"+paso+" "+reglaE);
+            break;
+        case ">=":
+            reglaE = "E.nodo = new Nodo('>=',E1.nodo,T.nodo)";
+            reglasEjecutadas.add("p"+paso+" "+reglaE);
+            break;
     }
 }
 
 public Nodo crear(String expresion){
-	StringTokenizer tokenizer;
-	String token;
-	tokenizer = new StringTokenizer(expresion,espacios+aritmeticos,true);
-	while(tokenizer.hasMoreTokens()){
-            token = tokenizer.nextToken();
-            if(espacios.indexOf(token)>=0){
-                //Se deja en blanco para ignorar espacios
-            } else if (aritmeticos.indexOf(token)<0){
-                ArbolNodo.push(new Nodo(token));
-                paso++;
-                String regla ="T.nodo = new Hoja(id<"+token+">,id.entrada)";
-                reglasEjecutadas.add("P"+paso+" "+regla);
-            } else if(token.equals(")")){
-                while(!caracter.empty()&&!caracter.peek().equals("(")){
+    raiz = new Nodo("");
+    StringTokenizer tokenizer;
+    String token;
+    tokenizer = new StringTokenizer(expresion,espacios+aritmeticos+relacionales,true);
+    while(tokenizer.hasMoreTokens()){
+        token = tokenizer.nextToken();
+        if(espacios.indexOf(token)>=0){
+            //Se deja en blanco para ignorar espacios
+        } else if (aritmeticos.indexOf(token)<0 && relacionales.indexOf(token)<0 && !token.equals("}")){
+            ArbolNodo.push(new Nodo(token));
+            paso++;
+            String regla ="T.nodo = new Hoja(id<"+token+">,id.entrada)";
+            reglasEjecutadas.add("P"+paso+" "+regla);
+        } else if(token.equals(")")){
+            while(!caracter.empty()&&!caracter.peek().equals("(")){
+                guardar();
+                raiz = (Nodo) ArbolNodo.peek();
+            }
+        } else if (token.equals("}")){
+            caracter.push(token);
+        } else {
+            if(!token.equals("(")&&!caracter.empty()){
+                String exa = (String) caracter.peek();
+                while(!exa.equals("(")&&caracter.empty()&&aritmeticos.indexOf(exa)>=aritmeticos.indexOf(token)){
                     guardar();
-                }
-            } else {
-                if(!token.equals("(")&&!caracter.empty()){
-                    String exa = (String) caracter.peek();
-                    while(!exa.equals("(")&&caracter.empty()&&aritmeticos.indexOf(exa)>=aritmeticos.indexOf(token)){
-                        guardar();
-                        if(!caracter.empty()){
-                            exa=(String) caracter.peek();
-                        }
+                    if(!caracter.empty()){
+                        exa=(String) caracter.peek();
                     }
                 }
-                caracter.push(token);
             }
+            if (token.contains("!") || token.contains(">") || token.contains("<")){
+                if(tokenizer.nextToken().equals("=")){
+                    token = token.toString()+"=";
+                }
+            }
+            caracter.push(token);
         }
-	while(!caracter.empty()){
-		if(caracter.peek().equals("(")){
-			caracter.pop();
-		} else {
-			guardar();
-			raiz = (Nodo) ArbolNodo.peek();
-		}
-	}
-	return raiz;
     }
+    while(!caracter.empty()){
+        if(caracter.peek().equals("(")){
+            caracter.pop();
+        } else {
+            guardar();
+            raiz = (Nodo) ArbolNodo.peek();
+        }
+    }
+    return raiz;
+}
     
 }

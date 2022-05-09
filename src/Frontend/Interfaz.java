@@ -38,6 +38,7 @@ import java_cup.runtime.Symbol;
 import Frontend.V_Identificadores;
 import Frontend.Acercade;
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  *
@@ -56,6 +57,8 @@ public class Interfaz extends javax.swing.JFrame {
     public static ArrayList<String> nm = new ArrayList<String>();
     int temp = 0;
     String ci = "";
+    Stack<Etiquetas> eti = new Stack<Etiquetas>();
+    int eticont = 0, etiminus=0;
 
     //Ruta del lexer (Solo se ejecuta una vez o cada que se modifique el Lexer.flex por eso esta en comentario)
     //D:\Cristopher\Documentos\Cristopher\Datos - Universidad\Semestre 10 Ene - Jun\03 - LENG. Y AUTOM II\CompiladorLEATE\src\Backend\Lexer.flex
@@ -826,6 +829,11 @@ public class Interfaz extends javax.swing.JFrame {
         jButton1.setName(""); // NOI18N
         jButton1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/Frontend/Imagenes/CodigoIntermedio-select.png"))); // NOI18N
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jToolBar1.add(jButton1);
 
         Fondo.add(jToolBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 50));
@@ -1185,7 +1193,12 @@ public class Interfaz extends javax.swing.JFrame {
                     if (linea.length() > 0) {
                         Nodo ar = a.crear(linea);
                         intermedio(ar);
-                        ci += ar.getCodigo();
+                        if((Object)ar.getCodigo() != null){
+                            ci += ar.getCodigo();
+                        }
+                    }
+                    if(cadenas[0].equals("While") || cadenas[0].equals("event")){
+                        ci += intermedioMet(cadenas[0]);
                     }
                 }
             }
@@ -1197,6 +1210,10 @@ public class Interfaz extends javax.swing.JFrame {
     private void btnLimpiarPSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarPSActionPerformed
         PanelSalida.setText("");
     }//GEN-LAST:event_btnLimpiarPSActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public void abrirsintexto() {
         //Metodo si no hay texto en el panel fuente para el boton abrir
@@ -1297,34 +1314,71 @@ public class Interfaz extends javax.swing.JFrame {
 
     //Generar el código intermedio
     public void intermedio(Nodo n) {
-        Nodo nodito = n;
         if (n != null) {
-            intermedio(nodito.getIzquierdo());
-            intermedio(nodito.getDerecho());
-            if (n.getIzquierdo() == null && n.getDerecho() == null) {
-                n.setLugar(n.getDato() + "");
-                n.setCodigo("");
-            } else if (n.getDato().equals("+") || (n.getDato().equals("*")) || n.getDato().equals("-") || n.getDato().equals("/")) {
-                temp++;
-                n.setLugar("T" + temp);
-                String codigoI = "";
-                Nodo izquierdo = n.getIzquierdo();
-                Nodo derecho = n.getDerecho();
+            if(!n.getDato().equals("")){
+                intermedio(n.getIzquierdo());
+                intermedio(n.getDerecho());
+                if (n.getIzquierdo() == null && n.getDerecho() == null) {
+                    n.setLugar(n.getDato() + "");
+                    n.setCodigo("");
+                } else if (n.getDato().equals("+") || (n.getDato().equals("*")) || 
+                        n.getDato().equals("-") || n.getDato().equals("/")) {
+                    temp++;
+                    n.setLugar("T" + temp);
+                    String codigoI = "";
+                    Nodo izquierdo = n.getIzquierdo();
+                    Nodo derecho = n.getDerecho();
 
-                codigoI = izquierdo.getCodigo() + " " + derecho.getCodigo() + " "
-                        + n.getLugar() + " = " + izquierdo.getLugar() + " " + n.getDato()
-                        + " " + derecho.getLugar();
-                n.setCodigo(codigoI + "\n");
-                ci += codigoI + "\n";
-            } else if (n.getDato().equals("=")) {
-                String codigoI = "";
-                Nodo izquierdo = n.getIzquierdo();
-                Nodo derecho = n.getDerecho();
-                codigoI = derecho.getCodigo() + " " + izquierdo.getLugar()
-                        + " = " + derecho.getLugar();
-                n.setCodigo(codigoI + "\n");
+                    codigoI = izquierdo.getCodigo() + " " + derecho.getCodigo() + " "
+                            + n.getLugar() + " = " + derecho.getLugar() + " " + n.getDato()
+                            + " " + izquierdo.getLugar();
+                    n.setCodigo(codigoI + "\n");
+                } else if (n.getDato().equals(">") || n.getDato().equals("<") ||
+                        n.getDato().equals(">=") || n.getDato().equals("<=") ||
+                        n.getDato().equals("==") || n.getDato().equals("!=")) {
+                    temp++;
+                    n.setLugar("T" + temp);
+                    String codigoI = "";
+                    Nodo izquierdo = n.getIzquierdo();
+                    Nodo derecho = n.getDerecho();
+                    eticont++;
+                    codigoI = izquierdo.getCodigo() + " " + derecho.getCodigo() + " "
+                            + n.getLugar() + " = " + derecho.getLugar() + " " + n.getDato()
+                            + " " + izquierdo.getLugar();
+                    n.setCodigo(codigoI + "\n");
+                    eti.add(new Etiquetas("L"+eticont,n.getLugar(),eticont));
+                } else if (n.getDato().equals("=")) {
+                    String codigoI = "";
+                    Nodo izquierdo = n.getIzquierdo();
+                    Nodo derecho = n.getDerecho();
+                    codigoI = izquierdo.getCodigo() + " " + derecho.getLugar()
+                            + " = " + izquierdo.getLugar();
+                    n.setCodigo(codigoI + "\n");
+                } else if (n.getDato().equals("}")){
+                    if(!eti.isEmpty()){
+                        if(eti.peek().getEtiqueta().equals("L"+eticont)){
+                            String codigoI = "if ("+eti.peek().getComparacion()+") goto "
+                                    +eti.peek().getEtiqueta();
+                            eti.pop();
+                            n.setCodigo(codigoI+"\n");
+                        }
+                    }
+                }   
             }
+        } 
+    }
+    
+    public String intermedioMet(String metodo){
+        String Eti = "";
+        switch(metodo){
+            case "While":
+                Eti = "L"+eticont+": ";
+                break;
+            case "event":
+                
+                break;
         }
+        return Eti;
     }
 
     //variable que contendra la ruta del archivo
