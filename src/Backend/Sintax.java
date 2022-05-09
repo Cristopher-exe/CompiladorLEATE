@@ -1082,7 +1082,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
     public boolean banderaErroresProducidos = false; //Si existe un error producido esta variable = true
     
     
-    public String msj_ErroresProducidos = ""; //Variable global donde se guarda todos los errores generales
+    public static String msj_ErroresProducidos = ""; //Variable global donde se guarda todos los errores generales
     public String msj_ErrorGeneral = ""; //Variable global donde se guarda el error general
 
 
@@ -1137,9 +1137,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
         }
     }
 
-    public void ErrorUI(String pMsg, String token, int linea, String mensaje)
-    {
-        
+    public static void ErrorUI(String pMsg, String token, int linea, String mensaje){
         String msg = "";
         msg += pMsg + " En la línea: " + (linea) +"["+token+"]. "+mensaje+"\n"; //Aqui se guardan todos los errores producidos
         msj_ErroresProducidos += msg;
@@ -1205,7 +1203,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
                     V_Identificadores.identi.addRow(I);
                 }else if(mat2.matches()){
                     Interfaz.banderax = true; //Como hay un error 
-                    ErrorUI("*Error Semantico 088.",id,pos,"No hay coincidencia de tipos");
+                    ErrorUI("*Error Semantico 003.",String.valueOf(tem3),pos,"No hay coincidencia de tipos");
                 }else{
                     V_Identificadores.identi.addRow(I);
                 }
@@ -1218,7 +1216,7 @@ public class Sintax extends java_cup.runtime.lr_parser {
             atributosIdentificador atr = new atributosIdentificador(tipoDeDato,val,pos,amb);
             V_Identificadores.identificadores.put(id,atr);
             Interfaz.banderax = true; //Como hay un error 
-            ErrorUI("*Error Semantico 087.",id,pos,"El identificador ya esta declarado");
+            ErrorUI("*Error Semantico 002.",id,pos,"El identificador ya esta declarado");
             
         }
     }
