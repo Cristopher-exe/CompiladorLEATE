@@ -1,2 +1,2 @@
-# CompiladorLEATE
-Proyecto de Lenguajes y Autómatas II
+# Compilador LEATE
+Lenguaje de Aprendizaje Temprano
